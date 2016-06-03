@@ -8,17 +8,20 @@ $(function(){
     var zip = $("#zip").val()
     var url = "http://service.dice.com/api/rest/jobsearch/v1/simple.json?skill=" + skill + "&city=" + zip + "&sort=1"
 
-    $.getJSON("http://service.dice.com/api/rest/jobsearch/v1/simple.json?skill=ruby&city=10023&sort=1", function(response){
+    $.getJSON(url, function(response){
       debugger
     })
 
-    // $.ajax({
-    //   url: url,
-    //   type: 'get',
-    //   dataType: 'json',
-    //   success: function(){
-    //     debugger
-    //   }
-    // })
+    $.ajax({
+      url: url,
+      type: 'get',
+      dataType: 'json',
+      success: function(){
+        debugger
+      }
+      error: function(){
+        
+      }
+    })
   })
 })
