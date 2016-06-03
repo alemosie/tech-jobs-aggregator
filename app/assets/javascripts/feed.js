@@ -3,7 +3,11 @@ function slugify(value){
 }
 
 $(function(){
-  $(':submit').click(function(){
+
+  $(':submit').click(function(e){
+    e.preventDefault();
+    e.stopPropagation();
+
     var skill = slugify($("#skill").val())
     var zip = $("#zip").val()
     var url = "http://service.dice.com/api/rest/jobsearch/v1/simple.json?skill=" + skill + "&city=" + zip + "&sort=1"
@@ -11,17 +15,17 @@ $(function(){
     $.getJSON(url, function(response){
       debugger
     })
-
-    $.ajax({
-      url: url,
-      type: 'get',
-      dataType: 'json',
-      success: function(){
-        debugger
-      }
-      error: function(){
-        
-      }
-    })
+    // 
+    // $.ajax({
+    //   url: url,
+    //   type: 'get',
+    //   dataType: 'json',
+    //   success: function(){
+    //     debugger
+    //   }
+    //   error: function(){
+    //
+    //   }
+    // })
   })
 })
