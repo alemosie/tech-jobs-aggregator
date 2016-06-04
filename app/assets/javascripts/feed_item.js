@@ -28,6 +28,6 @@ FeedItem.prototype.formatCompany = function(){
 FeedItem.prototype.formatLocation = function(){
 }
 
-FeedItem.prototype.formatLi = function(){
-  return "<div>" + this.formatPosition() + this.formatCompany() + "</div>"
+FeedItem.prototype.formatDiv = function(){
+  return "<div>" + this.formatPosition() + this.formatCompany() + this.location + "</div>"
 }

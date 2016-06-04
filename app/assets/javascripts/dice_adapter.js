@@ -9,18 +9,19 @@ function DiceAdapter(skill, zip) {
 }
 
 DiceAdapter.prototype.getData = function() {
+  var _this = this;
   $.getJSON(this.searchUrl, this.appendFeedItems)
   .done(function(response){
     if (response.nextUrl !== undefined) {
-      this.searchUrl = "http://service.dice.com/" + response.nextUrl;
-      this.getData();
+      _this.searchUrl = "http://service.dice.com/" + response.nextUrl;
+      _this.getData();
     }
-  }, this)
+  })
 }
 
 DiceAdapter.prototype.appendFeedItems = function(response) {
   response.resultItemList.forEach(function(job){
-    $('#dice-feed').append( new FeedItem(job).formatLi() )
+    $('#dice-feed').append( new FeedItem(job).formatDiv() )
   })
 }
 
