@@ -8,16 +8,6 @@ function DiceAdapter(skill, zip) {
   this.searchUrl = this.baseUrl + this.skillQuery + "&" + this.zipQuery + "&sort=1&" + this.ageQuery;
 }
 
-DiceAdapter.prototype.slugify = function(str) {
-  return str.toLowerCase().split(" ").join("-")
-}
-
-DiceAdapter.prototype.appendFeedItems = function(response) {
-  response.resultItemList.forEach(function(job){
-    $('#dice-feed').append( new FeedItem(job).formatLi() )
-  })
-}
-
 DiceAdapter.prototype.getData = function() {
   var _this = this;
   $.getJSON(this.searchUrl, this.appendFeedItems)
@@ -27,4 +17,14 @@ DiceAdapter.prototype.getData = function() {
       _this.getData();
     }
   })
+}
+
+DiceAdapter.prototype.appendFeedItems = function(response) {
+  response.resultItemList.forEach(function(job){
+    $('#dice-feed').append( new FeedItem(job).formatDiv() )
+  })
+}
+
+DiceAdapter.prototype.slugify = function(str) {
+  return str.toLowerCase().split(" ").join("-")
 }

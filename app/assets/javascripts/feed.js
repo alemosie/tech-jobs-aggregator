@@ -5,7 +5,7 @@ $(function(){
 
 
 function addFormSubmitListener() {
-  $(':submit').click(function(e){
+  $('#job-search').submit(function(e){
     e.preventDefault();
     e.stopPropagation();
 
