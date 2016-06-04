@@ -4,7 +4,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       log_in(@user)
-      redirect_to profile_path(@user)
+      redirect_to feed_path
     else
       # refresh main page and tell them something went wrong
     end
