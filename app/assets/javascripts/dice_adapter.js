@@ -8,8 +8,14 @@ function DiceAdapter(skill, zip) {
   this.searchUrl = this.baseUrl + this.skillQuery + "&" + this.zipQuery + "&sort=1&" + this.ageQuery;
 }
 
-DiceAdapter.prototype.slugify = function(str) {
-  return str.toLowerCase().split(" ").join("-")
+DiceAdapter.prototype.getData = function() {
+  $.getJSON(this.searchUrl, this.appendFeedItems)
+  .done(function(response){
+    if (response.nextUrl !== undefined) {
+      this.searchUrl = "http://service.dice.com/" + response.nextUrl;
+      this.getData();
+    }
+  }, this)
 }
 
 DiceAdapter.prototype.appendFeedItems = function(response) {
@@ -18,13 +24,6 @@ DiceAdapter.prototype.appendFeedItems = function(response) {
   })
 }
 
-DiceAdapter.prototype.getData = function() {
-  var _this = this;
-  $.getJSON(this.searchUrl, this.appendFeedItems)
-  .done(function(response){
-    if (response.nextUrl !== undefined) {
-      _this.searchUrl = "http://service.dice.com/" + response.nextUrl;
-      _this.getData();
-    }
-  })
+DiceAdapter.prototype.slugify = function(str) {
+  return str.toLowerCase().split(" ").join("-")
 }

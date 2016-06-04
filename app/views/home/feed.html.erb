@@ -1,5 +1,22 @@
+<% if logged_in? %>
+
+  <%= link_to "Your Profile", profile_path(@user) %>
+  <%= link_to "Log Out", logout_path, method: :delete %>
+
+<% else %>
+
+  <h3>Sign Up!</h3>
+  <div><%= render partial: "users/signup_form", locals: {user: @user} %></div>
+  <br>
+  <h3>Or, Log In!</h3>
+  <div><%= render "sessions/login_form" %></div>
+  <br>
+
+<% end %>
+
+
 <h1>Find a job!</h1>
-<form>
+<form id="job-search">
   Skill:<br>
   <input type="text" id="skill"><br>
   Zipcode:<br>
