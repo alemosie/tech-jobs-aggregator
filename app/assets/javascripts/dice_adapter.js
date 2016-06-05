@@ -13,8 +13,14 @@ DiceAdapter.prototype.getData = function() {
   $.getJSON(this.searchUrl, this.appendFeedItems)
   .done(function(response){
     if (response.nextUrl !== undefined) {
+
       _this.searchUrl = "http://service.dice.com/" + response.nextUrl;
       _this.getData();
+      
+    } else {
+
+      addFeedItemSaveButtonListener();
+
     }
   })
 }

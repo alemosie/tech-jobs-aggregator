@@ -1,15 +1,9 @@
 function FeedItem(json){
-  // distance-from-home
-  // summary
-  // salary
-  // skill-button
-
-  // from AJAX request
-  this.position = json.jobTitle;
-  this.url = json.detailUrl;
-  this.company = json.company;
+  this.position   = json.jobTitle;
+  this.url        = json.detailUrl;
+  this.company    = json.company;
   this.datePosted = json.date;
-  this.location = json.location;
+  this.location   = json.location;
 }
 
 // this often chops off text that we want to keep
@@ -18,11 +12,23 @@ FeedItem.prototype.cleanPositionTitle = function(){
 }
 
 FeedItem.prototype.formatPosition = function(){
-  return '<h3><a target="_blank" href="' + this.url + '">' + this.cleanPositionTitle() + "</a></h3>"
+  return '<h3 class="job-title"><a target="_blank" href="' + this.url + '">' + this.cleanPositionTitle() + "</a></h3>"
 }
 
 FeedItem.prototype.formatCompany = function(){
-  return '<h4>' + this.company + "</h4>"
+  return '<h4 class="job-company">' + this.company + '</h4>'
+}
+
+FeedItem.prototype.formatLocation = function(){
+  return '<p class="job-location">' + this.location + '</p>'
+}
+
+FeedItem.prototype.formatDatePosted = function(){
+  return '<p class="job-date-posted">Posted: ' + this.datePosted + '</p>'
+}
+
+FeedItem.prototype.formatSaveButton = function(){
+  return '<button class="save">Save</button>'
 }
 
 FeedItem.prototype.getLocationOfCompany = function(){
@@ -30,14 +36,13 @@ FeedItem.prototype.getLocationOfCompany = function(){
   return loc;
 }
 
-FeedItem.prototype.formatLi = function(){
-  return "<div>" + this.formatPosition() + this.formatCompany() + "</div>"
-}
-
 FeedItem.prototype.formatDiv = function(){
-  return "<div>" + 
+  return '<div class="job">' + 
          this.formatPosition() +
          this.formatCompany() +
-         this.location +
-         "</div>"
+         this.formatLocation() +
+         this.formatDatePosted() +
+         this.formatSaveButton() +
+         '</div>' +
+         '<br>'
 }

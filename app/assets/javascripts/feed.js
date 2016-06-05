@@ -18,7 +18,7 @@ function appendFeedItems(response) {
   })
 }
 
-$(function(){
+$(document).ready(function(){
   addFormSubmitListener();
 })
 
@@ -37,14 +37,22 @@ function addFormSubmitListener() {
   })
 }
 
-// function addFeedItemSaveButtonListener()
-//   $("the-button-id").click(function(e){
-//     e.preventDefault();
-//     e.stopPropagation();
+// this function is called on line 19 of dice_adapter.js
+function addFeedItemSaveButtonListener(){
+  $(":button.save").click(function(e){
+    e.preventDefault();
+    e.stopPropagation();
 
-//     // get all the Job info
+    if ( $("#saved-jobs-list").length ) {
 
-//     // make a new Job object with that info
+      var jobInfoDiv = $(this)
+      var job = new Job(jobInfoDiv);
+      job.populateFields();
+      job.save();
 
-//     // post it to our application
-//   })
+    } else {
+      alert("You must be signed in to do that!");
+    }
+
+  })
+}
