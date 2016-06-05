@@ -4,11 +4,14 @@
   <title>TechJobsAggregator</title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAOhcTFILlLOl1XUt2koFrrbu7lDnQ9zNM&libraries=places"></script>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
 <%= yield %>
+
+<div id="google-places"> </div>
 
 </body>
 </html>
