@@ -24,10 +24,16 @@ function addFeedItemSaveButtonListener(){
     e.preventDefault();
     e.stopPropagation();
 
-    var jobInfoDiv = $(this)
-    var job = new Job(jobInfoDiv);
+    if ( $("#saved-jobs-list").length ) {
 
-    job.populateFields();
-    job.save();
+      var jobInfoDiv = $(this)
+      var job = new Job(jobInfoDiv);
+      job.populateFields();
+      job.save();
+
+    } else {
+      alert("You must be signed in to do that!");
+    }
+
   })
 }
