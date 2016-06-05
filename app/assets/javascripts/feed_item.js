@@ -12,23 +12,23 @@ FeedItem.prototype.cleanPositionTitle = function(){
 }
 
 FeedItem.prototype.formatPosition = function(){
-  return '<h3 class="job-title"><a target="_blank" href="' + this.url + '">' + this.cleanPositionTitle() + "</a></h3>"
+  return '<h3 class="job-title"><a target="_blank" href="' + this.url + '">' + this.cleanPositionTitle() + "</a></h3>";
 }
 
 FeedItem.prototype.formatCompany = function(){
-  return '<h4 class="job-company">' + this.company + '</h4>'
+  return '<h4 class="job-company">' + this.company + '</h4>';
 }
 
 FeedItem.prototype.formatLocation = function(){
-  return '<p class="job-location">' + this.location + '</p>'
+  return '<p class="job-location">' + this.location + '</p>';
 }
 
 FeedItem.prototype.formatDatePosted = function(){
-  return '<p class="job-date-posted">Posted: ' + this.datePosted + '</p>'
+  return '<p class="job-date-posted">Posted: ' + this.datePosted + '</p>';
 }
 
 FeedItem.prototype.formatSaveButton = function(){
-  return '<button class="save">Save</button>'
+  return '<button class="save">Save</button>';
 }
 
 FeedItem.prototype.getLocationOfCompany = function(){
