@@ -3,7 +3,5 @@ class User < ActiveRecord::Base
 
   has_many :jobs
   validates_presence_of :name, :username, :email, :password
-  
-  validates :username, uniqueness: true
-  validates :email, uniqueness: true
+  validates_uniqueness_of :username, :email
 end

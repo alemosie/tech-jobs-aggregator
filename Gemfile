@@ -36,6 +36,8 @@ group :development, :test do
   gem 'figaro'
   gem 'byebug'
   gem 'pry-rails'
+  gem 'rspec-rails'
+  gem "jasmine"
 end
 
 group :development do
