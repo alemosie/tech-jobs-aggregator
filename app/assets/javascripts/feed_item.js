@@ -25,7 +25,13 @@ FeedItem.prototype.formatCompany = function(){
   return '<h4>' + this.company + "</h4>"
 }
 
-FeedItem.prototype.formatLocation = function(){
+FeedItem.prototype.getLocationOfCompany = function(){
+  var loc = new CompanyLocation(this.company).getPlaceDetails();
+  return loc;
+}
+
+FeedItem.prototype.formatLi = function(){
+  return "<div>" + this.formatPosition() + this.formatCompany() + "</div>"
 }
 
 FeedItem.prototype.formatDiv = function(){
