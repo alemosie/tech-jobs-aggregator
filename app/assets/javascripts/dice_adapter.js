@@ -15,6 +15,10 @@ DiceAdapter.prototype.getData = function() {
     if (response.nextUrl !== undefined) {
       _this.searchUrl = "http://service.dice.com/" + response.nextUrl;
       _this.getData();
+    } else {
+
+      addFeedItemSaveButtonListener();
+      
     }
   })
 }
