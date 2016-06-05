@@ -20,15 +20,20 @@ function appendFeedItems(response) {
 }
 
 $(function(){
+  addFormSubmitListener();
+})
 
-  $(':submit').click(function(e){
+
+function addFormSubmitListener() {
+  $('#job-search').submit(function(e){
     e.preventDefault();
     e.stopPropagation();
 
-    var skill = slugify($("#skill").val())
+    var skill = $("#skill").val()
     var zip = $("#zip").val()
-    var url = "http://service.dice.com/api/rest/jobsearch/v1/simple.json?skill=" + skill + "&city=" + zip + "&sort=1&age=30"
-
+    var adapter = new DiceAdapter(skill, zip);
     getJobsData(url)
+    $("#dice-feed").empty();
+    adapter.getData();
   })
-})
+}

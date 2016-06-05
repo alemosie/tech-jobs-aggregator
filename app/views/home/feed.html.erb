@@ -1,5 +1,21 @@
+<% if logged_in? %>
+
+  <%= render partial: "users/user_info", locals: {user: @user} %>
+
+<% else %>
+
+  <h3>Sign Up!</h3>
+  <div><%= render partial: "users/signup_form", locals: {user: @user} %></div>
+  <br>
+  <h3>Or, Log In!</h3>
+  <div><%= render "sessions/login_form" %></div>
+  <br>
+
+<% end %>
+
+
 <h1>Find a job!</h1>
-<form>
+<form id="job-search">
   Skill:<br>
   <input type="text" id="skill"><br>
   Zipcode:<br>
@@ -8,5 +24,5 @@
 </form>
 
 <div id="dice-feed">
-
+  <!-- items from DiceAPI search get appended here -->
 </div>

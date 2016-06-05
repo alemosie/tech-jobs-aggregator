@@ -12,12 +12,13 @@ function FeedItem(json){
   this.location = json.location;
 }
 
+// this often chops off text that we want to keep
 FeedItem.prototype.cleanPositionTitle = function(){
   return this.position.split(/-|\(/)[0].trim()
 }
 
 FeedItem.prototype.formatPosition = function(){
-  return '<h3><a href="' + this.url + '">' + this.cleanPositionTitle() + "</a></h3>"
+  return '<h3><a target="_blank" href="' + this.url + '">' + this.cleanPositionTitle() + "</a></h3>"
 }
 
 FeedItem.prototype.formatCompany = function(){
@@ -29,9 +30,9 @@ FeedItem.prototype.getLocationOfCompany = function(){
   return loc;
 }
 
-// FeedItem.prototype.formatLocation = function(){
-// }
-
 FeedItem.prototype.formatLi = function(){
   return "<div>" + this.formatPosition() + this.formatCompany() + this.getLocationOfCompany() + "</div>"
+
+FeedItem.prototype.formatDiv = function(){
+  return "<div>" + this.formatPosition() + this.formatCompany() + this.location + "</div>"
 }

@@ -1,0 +1,11 @@
+<%= link_to "Log Out", logout_path, method: :delete %>
+
+<h1><%= @user.name %></h1>
+
+<h3><%= @user.email %></h3>
+
+<h2>Your saved jobs:</h2>
+
+<div id="jobs-list">
+  <!-- render saved jobs here -->
+</div>
