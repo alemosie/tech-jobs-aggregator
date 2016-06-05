@@ -6,7 +6,8 @@ class UsersController < ApplicationController
       log_in(@user)
       redirect_to feed_path
     else
-      # refresh main page and tell them something went wrong
+      # flash message rendering not yet implemented
+      redirect_to feed_path
     end
   end
 

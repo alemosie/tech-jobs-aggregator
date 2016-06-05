@@ -29,5 +29,9 @@ FeedItem.prototype.formatLocation = function(){
 }
 
 FeedItem.prototype.formatDiv = function(){
-  return "<div>" + this.formatPosition() + this.formatCompany() + this.location + "</div>"
+  return "<div>" + 
+         this.formatPosition() +
+         this.formatCompany() +
+         this.location +
+         "</div>"
 }

@@ -17,3 +17,15 @@ function addFormSubmitListener() {
     adapter.getData();
   })
 }
+
+// function addFeedItemSaveButtonListener()
+//   $("the-button-id").click(function(e){
+//     e.preventDefault();
+//     e.stopPropagation();
+
+//     // get all the Job info
+
+//     // make a new Job object with that info
+
+//     // post it to our application
+//   })
