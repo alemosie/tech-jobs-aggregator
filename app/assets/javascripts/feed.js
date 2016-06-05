@@ -10,7 +10,6 @@ function getJobsData(url){
   }
 }
 
-
 function appendFeedItems(response) {
   var jobs = response.resultItemList
   jobs.forEach(function(job, index){
@@ -32,7 +31,7 @@ function addFormSubmitListener() {
     var skill = $("#skill").val()
     var zip = $("#zip").val()
     var adapter = new DiceAdapter(skill, zip);
-    getJobsData(url)
+    // getJobsData(url)
     $("#dice-feed").empty();
     adapter.getData();
   })
