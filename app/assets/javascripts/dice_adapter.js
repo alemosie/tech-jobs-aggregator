@@ -36,9 +36,13 @@ DiceAdapter.prototype.appendFeedItems = function(response) {
   // 3. Then, as a result of the above, you should end up with a collection of FeedItem objects, each of which have
         // a googlePlaceID attribute AND a distanceFromOrigin attribute
   // 4. Then, append them to the page with the code below
-  response.resultItemList.forEach(function(job){
-    $('#dice-feed').append( new FeedItem(job).formatDiv() )
-  })
+  if (response.count > 0) {
+    response.resultItemList.forEach(function(job){
+      $('#dice-feed').append( new FeedItem(job).formatDiv() )
+    })
+  } else {
+    $('#dice-feed').append("<h4><i>No results found</i></h4>")
+  }
 }
 
 DiceAdapter.prototype.slugify = function(str) {

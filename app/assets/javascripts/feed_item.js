@@ -28,7 +28,7 @@ FeedItem.prototype.formatDatePosted = function(){
 }
 
 FeedItem.prototype.formatSaveButton = function(){
-  return '<button class="save">Save</button>';
+  return '<div class=" col-xs-2 no-gutter"><button class="save btn btn-primary btn-circle">+</button></div>'
 }
 
 FeedItem.prototype.getLocationOfCompany = function(){
@@ -43,8 +43,8 @@ FeedItem.prototype.formatDiv = function(){
          this.formatCompany() +
          this.formatLocation() +
          this.formatDatePosted() +
-         this.formatSaveButton() +
          '</div>' +
+         this.formatSaveButton() +
          '</article>' +
          '<br>'
 }
