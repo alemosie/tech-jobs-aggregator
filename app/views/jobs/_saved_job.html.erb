@@ -4,7 +4,7 @@
   <p><%= job.location %></p>
   <p>Posted: <%= job.date_posted %></p>
   <p>You saved this when you searched for: <%= job.original_search_term %></p>
-  <%= link_to "/jobs/#{job.id}", method: :delete, remote: true  do %>
+  <%= link_to "/jobs/#{job.id}", method: :delete, remote: true do %>
     <button class="forget">Forget</button>
   <% end %>
 </div>

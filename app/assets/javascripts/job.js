@@ -8,7 +8,7 @@ Job.prototype.save = function(){
     type: 'POST',
     url: '/jobs',
     data: data,
-    dataType: 'json'
+    dataType: 'script'
   })
 }
 

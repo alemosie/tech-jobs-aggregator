@@ -32,5 +32,5 @@ DiceAdapter.prototype.appendFeedItems = function(response) {
 }
 
 DiceAdapter.prototype.slugify = function(str) {
-  return str.toLowerCase().split(" ").join("-")
+  return str.toLowerCase().split(" ").join("-");
 }
