@@ -16,7 +16,7 @@ describe UsersController, type: :controller do
     }
   end
 
-  context "create" do
+  context "#create" do
     it "creates a new user" do
       expect{post :create, request_params}.to change {User.count}.from(0).to(1)
     end

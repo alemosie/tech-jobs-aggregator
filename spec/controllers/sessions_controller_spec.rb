@@ -8,7 +8,7 @@ RSpec.describe SessionsController, :type => :controller do
 
   let(:user) { User.create(username: "chacha", name: "cha", email: "cha@chacha.com", password: "password")}
 
-  describe 'log-in' do
+  describe '#create' do
     it 'logs you in with the correct password' do
       post :create, { username: user.username, password: user.password}
       expect(session[:user_id]).to eq(user.id)
@@ -21,6 +21,14 @@ RSpec.describe SessionsController, :type => :controller do
 
     it 'rejects empty passwords' do
       post :create, { username: user.username, password:""}
+      expect(session[:user_id]).to be_nil
+    end
+  end
+
+  describe "#destroy" do
+    it "logs out the current user" do
+      allow(controller).to receive(:current_user).and_return(user)
+      delete :destroy
       expect(session[:user_id]).to be_nil
     end
   end
