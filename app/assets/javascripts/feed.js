@@ -32,7 +32,6 @@ function saveAndRenderJob(e){
   if ( $("#saved-jobs-list").length ) {
     var jobInfoDiv = $(this)
     new Job(jobInfoDiv).save();
-
   } else {
     alert("You must be signed in to do that!");
   }
