@@ -6,13 +6,9 @@ class UsersController < ApplicationController
       log_in(@user)
       redirect_to feed_path
     else
-      # flash message rendering not yet implemented
+      # redirect with a flash error message
       redirect_to feed_path
     end
-  end
-
-  def show
-    @user = User.find(params[:id])
   end
 
   private
