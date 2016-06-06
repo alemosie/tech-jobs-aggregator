@@ -1,9 +1,10 @@
-function FeedItem(json){
+function FeedItem(json, jobsCount){
   this.position   = json.jobTitle;
   this.url        = json.detailUrl;
   this.company    = json.company;
   this.datePosted = json.date;
   this.location   = json.location;
+  this.numFeedItems = jobsCount;
 }
 
 // this often chops off text that we want to keep
@@ -32,7 +33,8 @@ FeedItem.prototype.formatSaveButton = function(){
 }
 
 FeedItem.prototype.getLocationOfCompany = function(){
-  var loc = new PlacesAdapter(this.company).getPlaceDetails();
+  debugger
+  var loc = new PlacesAdapter(this.company, this.location).getPlaceID();
   return loc;
 }
 
@@ -42,7 +44,8 @@ FeedItem.prototype.formatDiv = function(){
          this.formatCompany() +
          this.formatLocation() +
          this.formatDatePosted() +
-         this.formatSaveButton() +
+         this.formatSaveButton() + 
+         this.getLocationOfCompany()
          '</div>' +
          '<br>'
 }
