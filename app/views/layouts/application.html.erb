@@ -77,7 +77,7 @@
           <div class="category row">
             <section>
               <% if logged_in? %>
-                <%= render partial: "users/user_info", locals: {user: @user} %>
+                <%= render partial: "users/user_info", locals: {user: @user, jobs: @jobs} %>
               <% else %>
                 <h3>Sign Up!</h3>
                 <div><%= render partial: "users/signup_form", locals: {user: @user} %></div>
