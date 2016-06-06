@@ -1,3 +1,7 @@
 var savedJobElementID = "#saved-job-" + "<%= @job.id %>";
 
-$(savedJobElementID).remove();
+$(savedJobElementID).fadeOut();
+
+setTimeout(function(){
+  $(savedJobElementID).remove();
+}, 1000);
