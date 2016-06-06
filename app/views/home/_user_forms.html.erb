@@ -1,10 +1,12 @@
 <% if logged_in? %>
   <%= render partial: "users/user_info", locals: {user: @user, jobs: @jobs} %>
 <% else %>
-  <h3>Sign Up!</h3>
-  <div><%= render partial: "users/signup_form", locals: {user: @user} %></div>
-  <br>
-  <h3>Or, Log In!</h3>
-  <div><%= render "sessions/login_form" %></div>
-  <br>
+  <article class="post-favorite col-xs-12 col-sm-6 ">
+    <h2>Log in...</h2>
+    <div><%= render "sessions/login_form" %></div>
+  </article>
+  <article class="post-favorite col-xs-12 col-sm-6 ">
+    <h2>Or come join us!</h2>
+    <div><%= render partial: "users/signup_form", locals: {user: @user} %></div>
+  </article>
 <% end %>
