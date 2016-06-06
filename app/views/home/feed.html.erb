@@ -1,6 +1,6 @@
 <% if logged_in? %>
 
-  <%= render partial: "users/user_info", locals: {user: @user} %>
+  <%= render partial: "users/user_info", locals: {user: @user, jobs: @jobs} %>
 
 <% else %>
 
