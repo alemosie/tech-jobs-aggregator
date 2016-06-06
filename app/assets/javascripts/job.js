@@ -15,23 +15,14 @@ Job.prototype.save = function(){
 Job.prototype.dataObj = function(){
   return { "job":
     {
-      "position": this.position,
-      "url": this.url,
-      "company": this.company,
-      "location": this.location,
-      "date_posted": this.datePosted,
-      "original_search_term": this.originalSearchTerm
+      "position": this.findPosition(),
+      "url": this.findUrl(),
+      "company": this.findCompany(),
+      "location": this.findLocation(),
+      "date_posted": this.findDatePosted(),
+      "original_search_term": this.findOriginalSearchTerm()
     }
   }
-}
-
-Job.prototype.populateFields = function(){
-  this.position = this.findPosition();
-  this.url = this.findUrl();
-  this.company = this.findCompany();
-  this.location = this.findLocation();
-  this.datePosted = this.findDatePosted();
-  this.originalSearchTerm = this.findOriginalSearchTerm();
 }
 
 Job.prototype.findPosition = function(){

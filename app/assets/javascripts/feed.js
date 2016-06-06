@@ -28,9 +28,7 @@ function addFeedItemSaveButtonListener(){
     if ( $("#saved-jobs-list").length ) {
 
       var jobInfoDiv = $(this)
-      var job = new Job(jobInfoDiv);
-      job.populateFields();
-      job.save();
+      new Job(jobInfoDiv).save();
 
     } else {
       alert("You must be signed in to do that!");
