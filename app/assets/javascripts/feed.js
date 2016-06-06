@@ -17,7 +17,8 @@ function addFormSubmitListener() {
   })
 }
 
-// this function is called on line 19 of dice_adapter.js
+// this function is called in DiceAdapter.getData(),
+// defined in dice_adapter.js
 function addFeedItemSaveButtonListener(){
   $(":button.save").click(function(e){
     e.preventDefault();
