@@ -20,11 +20,11 @@ FeedItem.prototype.formatCompany = function(){
 }
 
 FeedItem.prototype.formatLocation = function(){
-  return '<p class="job-location">' + this.location + '</p>';
+  return '<p class="meta job-location">' + this.location;
 }
 
 FeedItem.prototype.formatDatePosted = function(){
-  return '<p class="job-date-posted">Posted: ' + this.datePosted + '</p>';
+  return '<i class="link-spacer"></i> <i class="fa fa-bookmark"></i> Posted on ' + this.datePosted + '</p>';
 }
 
 FeedItem.prototype.formatSaveButton = function(){
