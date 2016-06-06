@@ -1,12 +1,13 @@
-<h1>Find a job!</h1>
+<br><br>
 <form id="job-search">
-  Skill:<br>
-  <input type="text" id="skill"><br>
-  Zipcode:<br>
-  <input type="text" id="zip">
-  <input type="submit">
+  <fieldset class="form-group">
+    <input type="text" class="form-control" id="skill" placeholder="Enter skill, e.g. Ruby, Python">
+  </fieldset>
+  <fieldset class="form-group">
+    <input type="text" class="form-control" id="zip" placeholder="Enter zipcode">
+  <input type="submit" value="Find a job!">
 </form>
-
+<br><br>
 <div id="dice-feed">
   <!-- items from DiceAPI search get appended here -->
 </div>

@@ -4,6 +4,7 @@ function Job(infoDiv){
 
 Job.prototype.save = function(){
   var data = this.dataObj();
+  debugger;
   $.ajax({
     type: 'POST',
     url: '/jobs',
@@ -26,27 +27,23 @@ Job.prototype.dataObj = function(){
 }
 
 Job.prototype.findPosition = function(){
-  var positionElement = this.infoDiv.siblings('.job-title');
-  return $(positionElement).children('a').text();
+  return this.infoDiv.children(".job-title").children("a").text();
 }
 
 Job.prototype.findUrl = function(){
-  return this.infoDiv.siblings('.job-title').children('a').attr('href');
+  return this.infoDiv.children(".job-title").children("a").attr("href");
 }
 
 Job.prototype.findCompany = function(){
-  var companyElement = this.infoDiv.siblings('.job-company');
-  return $(companyElement).text();
+  return this.infoDiv.children(".job-company").text();
 }
 
 Job.prototype.findLocation = function(){
-  var locationElement = this.infoDiv.siblings('.job-location');
-  return $(locationElement).text();
+  return this.infoDiv.children(".job-location").text().split("Posted on ")[0].trim();
 }
 
 Job.prototype.findDatePosted = function(){
-  var datePostedElement = this.infoDiv.siblings('.job-date-posted');
-  return $(datePostedElement).text().slice(8);
+  return this.infoDiv.children(".job-location").text().split("Posted on ")[1];
 }
 
 Job.prototype.findOriginalSearchTerm = function(){

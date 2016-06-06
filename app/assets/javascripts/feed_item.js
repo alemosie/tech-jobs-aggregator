@@ -20,15 +20,15 @@ FeedItem.prototype.formatCompany = function(){
 }
 
 FeedItem.prototype.formatLocation = function(){
-  return '<p class="job-location">' + this.location + '</p>';
+  return '<p class="meta job-location">' + this.location;
 }
 
 FeedItem.prototype.formatDatePosted = function(){
-  return '<p class="job-date-posted">Posted: ' + this.datePosted + '</p>';
+  return '<i class="link-spacer"></i> <i class="fa fa-bookmark"></i> Posted on ' + this.datePosted + '</p>';
 }
 
 FeedItem.prototype.formatSaveButton = function(){
-  return '<button class="save">Save</button>';
+  return '<div class=" col-xs-2 no-gutter"><button class="save btn btn-primary btn-circle">+</button></div>'
 }
 
 FeedItem.prototype.getLocationOfCompany = function(){
@@ -43,18 +43,8 @@ FeedItem.prototype.formatDiv = function(){
          this.formatCompany() +
          this.formatLocation() +
          this.formatDatePosted() +
-         this.formatSaveButton() +
          '</div>' +
+         this.formatSaveButton() +
          '</article>' +
          '<br>'
 }
-
-// <p class="meta">
-//     <a href="author.html">Sarah Smith</a> in <a href="category.html">Adventure</a> <i class="link-spacer"></i> <i class="fa fa-bookmark"></i> 5 minute read
-// </p>
-// </div>
-//
-// <div class=" col-xs-2 no-gutter">
-//     <img src="img/profile-4.jpg" class="user-icon user-1" alt="user-image">
-// </div>
-// </article>

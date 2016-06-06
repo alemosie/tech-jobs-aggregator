@@ -1,18 +1,18 @@
 <%= form_for user do |f| %>
-  <%= f.label :username %>
-  <%= f.text_field :username %>
-  <br>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <br>
-  <%= f.label :email %>
-  <%= f.text_field :email %>
-  <br>
-  <%= f.label :password %>
-  <%= f.password_field :password %>
-  <br>
-  <%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation %>
-  <br>
+  <%= f.text_field :username, class: "form-control", placeholder:"Enter username" %>
+  <%= f.text_field :name, class: "form-control", placeholder:"Enter name" %>
+  <%= f.text_field :email, class: "form-control", placeholder:"Enter email" %>
+  <%= f.password_field :password, class: "form-control", placeholder:"Enter password" %>
+  <%= f.password_field :password_confirmation, class: "form-control", placeholder:"Confirm password" %>
   <%= f.submit "Create Your Account" %>
 <% end %>
+
+<!--
+<form id="job-search">
+  <fieldset class="form-group">
+    <input type="text" class="form-control" id="skill" placeholder="Enter skill, e.g. Ruby, Python">
+  </fieldset>
+  <fieldset class="form-group">
+    <input type="text" class="form-control" id="zip" placeholder="Enter zipcode">
+  <input type="submit" value="Find a job!">
+</form> -->

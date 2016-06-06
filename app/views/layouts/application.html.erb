@@ -6,7 +6,7 @@
   <title>Where the Jobs At?</title>
 
   <!-- rails-specific layout elements -->
-  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= csrf_meta_tags %>
 
   <!-- google places library -->
@@ -22,38 +22,19 @@
 
 <body>
   <body style="background-color: white !important">
-    <!-- <%= yield %> -->
   <main class="container left-container">
     <div class="row">
 
-      <div id="menu-target">
-        <ul>
-          <li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
-          <li><i class="fa fa-user"></i><a href="author.html">John Smith</a></li>
-          <li><i class="fa fa-anchor"></i><a href="page.html">About</a></li>
-          <li><i class="fa fa-star"></i><a href="favorites.html">Favorites</a></li>
-          <li><i class="fa fa-paper-plane"></i><a href="contact.html">Contact</a></li>
-        </ul>
-        <hr>
-        <ul>
-          <li><i class="fa fa-file"></i><a href="post.html">Post Page</a></li>
-          <li><i class="fa fa-file"></i><a href="post-sidebar.html">Post with Sidebar</a></li>
-
-          <li><i class="fa fa-home"></i><a href="alt-home.html">Alternate Home</a></li>
-          <li><i class="fa fa-image"></i><a href="category.html">Category Page</a></li>
-        </ul>
-      </div>
-
-      <section class="sidebar col-md-5 col-sm-12" style="background-image: url(http://www.shauntmax30.com/data/out/41/1304610-hd-quality-the-matrix-image.jpg)">
+      <section class="sidebar col-md-5 col-sm-12" style="background-image: url(http://heroicuniverse.com/wp-content/uploads/2015/05/batman_in_gotham_wallpaper_by_xavor85-d4bqx37.jpg)">
 
         <div class="site-info">
           <div class="primary-info">
-            <h1>Where the Jobs At?</h1>
+            <h1>Where the Tech At?</h1>
             <p>A simple tool to find you a simple job.</p>
           </div>
           <div class="secondary-info">
             <p>
-              <a class="btn btn-primary" href="#"><i class="fa fa-user-plus"></i>FIND JOBS</a>
+              <!-- <a href="github.com"><img src="https://wasin.io/wp-content/uploads/2015/05/showimage.png" alt=""></img></a> -->
             </p>
           </div>
         </div>
@@ -76,23 +57,13 @@
         <div class="home-page-categories hide animated fadeIn ">
           <div class="category row">
             <section>
-              <% if logged_in? %>
-                <%= render partial: "users/user_info", locals: {user: @user, jobs: @jobs} %>
-              <% else %>
-                <h3>Sign Up!</h3>
-                <div><%= render partial: "users/signup_form", locals: {user: @user} %></div>
-                <br>
-                <h3>Or, Log In!</h3>
-                <div><%= render "sessions/login_form" %></div>
-                <br>
-              <% end %>
+              <%= render partial: "home/user_forms", locals: {user: @user, jobs: @jobs} %>
             </section>
           </div>
         </div>
         <footer class="split-footer">
-          <a href="post.html">About</a>
-          <i class="link-spacer"></i>
-          <a href="post.html">Writer 2015</a>
+          <a href="https://github.com/alemosie/tech-jobs-aggregator">Made by Duncan & Alex @ the Flatiron School</a>
+          <!-- <i class="link-spacer"></i> -->
         </footer>
       </section><!-- main content -->
     </div> <!--/row -->
