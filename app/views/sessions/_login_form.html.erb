@@ -1,8 +1,6 @@
 <%= form_tag login_path, id: "log-in" do %>
   <fieldset class="form-group">
     <%= text_field_tag :username, "", class: "form-control", placeholder:"Enter username" %>
-  </fieldset>
-  <fieldset class="form-group">
     <%= password_field_tag :password, "", class: "form-control", placeholder:"Enter password" %>
     <%= submit_tag "Log In" %>
   </fieldset>

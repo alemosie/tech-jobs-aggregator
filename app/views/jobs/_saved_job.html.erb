@@ -1,10 +1,13 @@
-<div id=<%="saved-job-#{job.id}"%> >
-  <h3><%= link_to job.position, job.url, target: "_blank" %></h3>
-  <h4><%= job.company %></h4>
-  <p><%= job.location %></p>
-  <p>Posted: <%= job.date_posted %></p>
-  <p>You saved this when you searched for: <%= job.original_search_term %></p>
-  <%= link_to "/jobs/#{job.id}", method: :delete, remote: true do %>
-    <button class="forget">Forget</button>
-  <% end %>
-</div>
+<article class="post">
+    <div class="job post-preview col-xs-10 no-gutter" id=<%="saved-job-#{job.id}"%>>
+    <h2 class="job-title"><a target="_blank" href="<%=job.url%>"><%= job.position %></a></h2>
+    <h4 class="job-company"><%= job.company %></h4>
+    <p class="meta job-location"><%= job.location %>
+    <i class="link-spacer"></i> <i class="fa fa-bookmark"></i> Posted on <%= job.date_posted %></p>
+    <p class="meta">You saved this when you searched for: <%= job.original_search_term %></p>
+    <br>
+    <%= link_to "/jobs/#{job.id}", method: :delete, remote: true do %>
+      <div class=" col-xs-2 no-gutter"><button class="forget btn btn-primary btn-circle"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button></div>
+    <% end %>
+  </div>
+</article>

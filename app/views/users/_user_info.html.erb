@@ -1,12 +1,15 @@
 <p class="login-info">signed in as: <%=@user.name%>, email: <%= @user.email %></i>&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to "Log Out", logout_path, method: :delete %></p>
 <h1>Hiya, <%= @user.name.capitalize %>!</h1>
 
+<h2 class="favorites">Saved jobs</h2>
 <div id="saved-jobs-list">
   <% if jobs.any? %>
     <% jobs.each do |j| %>
       <%= render partial: "jobs/saved_job", locals: {job: j} %>
     <% end %>
   <% else %>
-    <h3>Save some jobs to access later!</h3>
+  <div class="col-sm-12">
+      <p class="meta">No jobs yet -- save jobs to access them later</p>
+  </div>
   <% end %>
 </div>
