@@ -1,10 +1,7 @@
-<%= link_to "Log Out", logout_path, method: :delete %>
+<p class="login-info">signed in as: <%=@user.name%>, email: <%= @user.email %></i>&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to "Log Out", logout_path, method: :delete %></p>
+<h1>Hiya, <%= @user.name.capitalize %>!</h1>
 
-<h1><%= @user.name %></h1>
-
-<h3><%= @user.email %></h3>
-
-<h2>Your saved jobs:</h2>
+<h2>Your saved jobs are here:</h2>
 
 <div id="saved-jobs-list">
   <!-- render saved jobs here -->
