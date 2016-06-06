@@ -37,7 +37,7 @@ function saveAndRenderJob(e){
   e.stopPropagation();
 
   if ( $("#saved-jobs-list").length ) {
-    var jobInfoDiv = $(this)
+    var jobInfoDiv = $(this).parent().siblings(".job")
     new Job(jobInfoDiv).save();
   } else {
     alert("You must be signed in to do that!");
