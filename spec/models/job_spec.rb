@@ -16,7 +16,7 @@ describe Job do
     }
   end
 
-  context "valid job object" do
+  context "job save" do
 
     it "is valid with valid attributes" do
       job = Job.new(valid_attributes)

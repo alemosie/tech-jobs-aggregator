@@ -22,7 +22,7 @@ describe JobsController, type: :controller do
   before(:each) { allow(controller).to receive(:current_user).and_return(user) }
 
 
-  context "create" do
+  context "#create" do
     it "saves the job to the database" do
       expect{xhr :post, :create, request_params}.to change {Job.count}.from(0).to(1)
     end
@@ -38,7 +38,7 @@ describe JobsController, type: :controller do
     end
   end
 
-  context "destroy" do
+  context "#destroy" do
     it "removes the job from the database" do
       xhr :post, :create, request_params
       expect{xhr :delete, :destroy, id: Job.first.id}.to change {Job.count}.from(1).to(0)
