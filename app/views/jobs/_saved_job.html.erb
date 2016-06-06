@@ -1,8 +1,10 @@
 <div id=<%="saved-job-#{job.id}"%> >
-  <h3><%= link_tag job.position, job.url %></h3>
+  <h3><%= link_to job.position, job.url %></h3>
   <h4><%= job.company %></h4>
   <p><%= job.location %></p>
   <p>Posted: <%= job.date_posted %></p>
   <br>
-  <%= link_to "Forget", "/jobs/#{job.id}", remote: true %>
+  <%= link_to "/jobs/#{job.id}", method: :delete, remote: true  do %>
+    <button>Forget</button>
+  <% end %>
 </div>

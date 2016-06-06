@@ -12,6 +12,8 @@ class JobsController < ApplicationController
   end
 
   def destroy
+    @job = Job.find(params[:id]).destroy
+    respond_to { |format| format.js }
   end
 
   private

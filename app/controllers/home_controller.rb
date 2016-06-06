@@ -1,7 +1,11 @@
 class HomeController < ApplicationController
   
   def feed
-    @user = current_user || User.new
+    if logged_in?
+      @user, @jobs = current_user, current_user.jobs
+    else
+      @user = User.new
+    end
   end
 
 end
