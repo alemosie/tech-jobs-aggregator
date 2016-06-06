@@ -16,7 +16,7 @@ DiceAdapter.prototype.getData = function() {
 
       _this.searchUrl = "http://service.dice.com/" + response.nextUrl;
       _this.getData();
-      
+
     } else {
 
       addFeedItemSaveButtonListener();

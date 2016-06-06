@@ -32,12 +32,12 @@ FeedItem.prototype.formatSaveButton = function(){
 }
 
 FeedItem.prototype.getLocationOfCompany = function(){
-  var loc = new CompanyLocation(this.company).getPlaceDetails();
+  var loc = new PlacesAdapter(this.company).getPlaceDetails();
   return loc;
 }
 
 FeedItem.prototype.formatDiv = function(){
-  return '<div class="job">' + 
+  return '<div class="job">' +
          this.formatPosition() +
          this.formatCompany() +
          this.formatLocation() +
