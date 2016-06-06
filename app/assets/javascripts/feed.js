@@ -1,15 +1,22 @@
 $(document).ready(function(){
   addFormSubmitListener();
+  preventForgetButtonPageRefresh();
 })
 
 
-function addFormSubmitListener() {
+function addFormSubmitListener(){
   $('#job-search').submit(renderJobData);
 }
 
 // this function is called in DiceAdapter.getData
 function addFeedItemSaveButtonListener(){
   $(":button.save").click(saveAndRenderJob);
+}
+
+function preventForgetButtonPageRefresh(){
+  $(":button.forget").click(function(e){
+    e.preventDefault();
+  })
 }
 
 
