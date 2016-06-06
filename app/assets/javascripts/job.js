@@ -4,6 +4,7 @@ function Job(infoDiv){
 
 Job.prototype.save = function(){
   var data = this.dataObj();
+  debugger;
   $.ajax({
     type: 'POST',
     url: '/jobs',
