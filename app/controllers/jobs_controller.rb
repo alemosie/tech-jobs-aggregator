@@ -1,8 +1,7 @@
 class JobsController < ApplicationController
   skip_before_action :verify_authenticity_token
-  
+
   def create
-    binding.pry
     @job = Job.new(job_params)
     @job.user = current_user
     if @job.save
