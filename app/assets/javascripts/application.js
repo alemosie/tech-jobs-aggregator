@@ -11,6 +11,15 @@
 // about supported directives.
 //
 //= require jquery
+//= require bootstrap-sprockets
 //= require jquery_ujs
 // require turbolinks
+
+// from theme
+//= require jquery.jpanelmenu.min
+//= require bootstrap.min
+//= require fastclick.min
+//= require modernizr.custom.32229-2.8-respondjs-1-4-2
+//= require main.js
+
 //= require_tree .
