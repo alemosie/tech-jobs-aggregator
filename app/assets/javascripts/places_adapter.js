@@ -1,22 +1,21 @@
-function PlacesAdapter(company, zip){
+function PlacesAdapter(feedItem){
+  this.feedItem = feedItem
   this.textSearchRequest = {
-    query: company + " near " + zip
+    query: feedItem.company + " near " + feedItem.location
   }
 }
 
 PlacesAdapter.prototype.getPlaceID = function(){
+  feedItem = this.feedItem
   var service = new google.maps.places.PlacesService($('#google-places').get(0));
-  service.textSearch(this.textSearchRequest, callback);
-}
-
-function callback(results, status) {
-  var placeIDs = []
-  if (status == google.maps.places.PlacesServiceStatus.OK) {
-    placeIDs.push(results[0].place_id);
-    if (placeIDs.length === numFeedItems) {
-       console.log("finished loading!")
+  service.textSearch(this.textSearchRequest, function(results, status) {
+    if (status == google.maps.places.PlacesServiceStatus.OK) {
+      feedItem.placeID = results[0].place_id;
+      console.log(feedItem.company + ": " + feedItem.placeID);
+    } else {
+      console.log(feedItem.company + "-- request failed " + status)
     }
-  }
+  });
 }
 
 // PlacesAdapter.prototype.getLocationData = function(){

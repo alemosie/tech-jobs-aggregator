@@ -4,6 +4,7 @@ function FeedItem(json){
   this.company    = json.company;
   this.datePosted = json.date;
   this.location   = json.location;
+  this.placeID    = "";
 }
 
 // this often chops off text that we want to keep
@@ -35,10 +36,48 @@ FeedItem.prototype.formatSaveButton = function(){
   return '<div class=" col-xs-2 no-gutter"><button class="save btn btn-primary btn-circle">+</button></div>'
 }
 
-FeedItem.prototype.getLocationOfCompany = function(){
-  var loc = new PlacesAdapter(this.company).getPlaceID();
-  return loc;
+function getPlaceIdForFeedItem(feedItem, feedItems, totalCount, originalZip) {
+  var textSearchRequest = {
+    query: feedItem.company + " near " + feedItem.location
+  }
+
+  var service = new google.maps.places.PlacesService($('#google-places').get(0));
+  service.textSearch(textSearchRequest, function(results, status) {
+    if (status == google.maps.places.PlacesServiceStatus.OK) {
+      feedItem.placeID = results[0].place_id;
+      console.log(feedItem.company + ": " + feedItem.placeID)
+    } else {
+      console.log(feedItem.company + "-- request failed " + status)
+    }
+
+    feedItems.push(feedItem);
+    if (feedItems.length == totalCount) {
+      var places = [];
+      feedItems.forEach(function(item){
+        places.push({placeId: item.placeID});
+      })
+      // If we got here, we just processed the last feedItem
+      // So now, for each feedItem in feedItems, do the matrix.
+      var service = new google.maps.DistanceMatrixService();
+      debugger
+      service.getDistanceMatrix(
+        {
+          origins: [originalZip],
+          destinations: places,
+          travelMode: google.maps.TravelMode.TRANSIT,
+        }, callback);
+    }
+  });
 }
+
+function callback(response, status) {
+   if (status == google.maps.DistanceMatrixStatus.OK) {
+     debugger
+   } else {
+     console.log(status) + "sadness"
+   }
+}
+
 
 FeedItem.prototype.formatDiv = function(){
   // this.location = this.getLocationOfCompany();
@@ -47,9 +86,9 @@ FeedItem.prototype.formatDiv = function(){
          this.formatCompany() +
          this.formatLocation() +
          this.formatDatePosted() +
-         this.getLocationOfCompany() + 
          '</div>' +
          this.formatSaveButton() +
+         '<div id="map">Map here!</div>' +
          '</article>' +
          '<br>'
 }

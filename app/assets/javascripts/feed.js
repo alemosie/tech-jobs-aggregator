@@ -31,6 +31,7 @@ function renderJobData(e){
   adapter.getData();
 }
 
+
 function saveAndRenderJob(e){
   e.preventDefault();
   e.stopPropagation();
