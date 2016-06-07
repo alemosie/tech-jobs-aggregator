@@ -28,13 +28,12 @@ DiceAdapter.prototype.getData = function() {
         getPlaceIdForFeedItem(feedItem, feedItems, response.count, _this.zip, _this.transit);
       });
 
-      $('#dice-feed').append("<h4><i>Found " + response.count + " results</i></h4><br>")
-
       // get moar dataz if necessary
       if (response.nextUrl !== undefined) {
         _this.searchUrl = "http://service.dice.com/" + response.nextUrl;
         _this.getData();
       } else {
+        $('#dice-feed').append("<h4><i>Found " + response.count + " results</i></h4><br>")
         addFeedItemSaveButtonListener();
       }
     } else {
