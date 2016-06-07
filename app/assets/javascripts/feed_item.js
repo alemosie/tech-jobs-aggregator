@@ -10,7 +10,7 @@ function FeedItem(json){
   FeedItem.all.push(this);
 }
 
-FeedItem.all = []
+FeedItem.all = [];
 
 // this often chops off text that we want to keep
 FeedItem.prototype.cleanPositionTitle = function(){
@@ -58,8 +58,9 @@ function getPlaceIdForFeedItem(feedItem, feedItems, totalCount, originalZip, tra
     }
 
     feedItems.push(feedItem);
-    feedItem.queryItems = feedItems;
 
+    // over query limit -- need to test code below
+    
     if (feedItems.length == totalCount) {
       var places = [];
       feedItems.forEach(function(item){
@@ -71,14 +72,34 @@ function getPlaceIdForFeedItem(feedItem, feedItems, totalCount, originalZip, tra
       console.log(feedItems)
       console.log(places)
 
-      // processed the last feedItem, so launch distance query
-      var distanceService = new google.maps.DistanceMatrixService();
-      distanceService.getDistanceMatrix(
-        {
-          origins: [originalZip],
-          destinations: places,
-          travelMode: transitMode,
-        }, callback.bind(feedItems));
+      if (places.length > 25) {
+        var itemCount = places.length
+        while (itemCount > 0) {
+          var section = items.slice(0,25);
+          section.forEach(function(job) {
+            var distanceService = new google.maps.DistanceMatrixService();
+            distanceService.getDistanceMatrix(
+              {
+                origins: [originalZip],
+                destinations: section,
+                travelMode: transitMode,
+              }, callback.bind(feedItems))
+          }); // slicing when there aren't 25 is still okay!
+          itemCount =- section.length;
+          for (var index in section) {
+            places.splice(index, 1)
+          }
+        }
+      } else {
+        // processed the last feedItem, so launch distance query
+        var distanceService = new google.maps.DistanceMatrixService();
+        distanceService.getDistanceMatrix(
+          {
+            origins: [originalZip],
+            destinations: places,
+            travelMode: transitMode,
+          }, callback.bind(feedItems))
+      }
     }
   });
 }
@@ -124,17 +145,17 @@ function callback(response, status) {
 }
 
 
-FeedItem.prototype.formatDiv = function(){
-  // this.location = this.getLocationOfCompany();
-  return '<article class="post"><div class="job post-preview col-xs-10 no-gutter">' +
-         this.formatPosition() +
-         this.formatCompany() +
-         this.formatLocation() +
-         this.formatDatePosted() + " "
-         this.distance +
-         '</div>' +
-         this.formatSaveButton() +
-         '<div id="map">Map here!</div>' +
-         '</article>' +
-         '<br>'
-}
+// FeedItem.prototype.formatDiv = function(){
+//   // this.location = this.getLocationOfCompany();
+//   return '<article class="post"><div class="job post-preview col-xs-10 no-gutter">' +
+//          this.formatPosition() +
+//          this.formatCompany() +
+//          this.formatLocation() +
+//          this.formatDatePosted() + " "
+//          this.distance +
+//          '</div>' +
+//          this.formatSaveButton() +
+//          '<div id="map">Map here!</div>' +
+//          '</article>' +
+//          '<br>'
+// }

@@ -7,7 +7,7 @@
     <p class="meta">You saved this when you searched for: <%= job.original_search_term %></p>
     <br>
     <%= link_to "/jobs/#{job.id}", method: :delete, remote: true do %>
-      <div class=" col-xs-2 no-gutter"><button class="forget btn btn-danger"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></button></div>
+      <div class=" col-xs-2 no-gutter"><button class="forget btn btn-primary btn-circle"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span></button></div>
     <% end %>
   </div>
 </article>

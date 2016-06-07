@@ -10,7 +10,16 @@ function addFormSubmitListener(){
 
 // this function is called in DiceAdapter.getData
 function addFeedItemSaveButtonListener(){
-  $(":button.save").click(saveAndRenderJob);
+  $(":button.save").click(function(e){
+    e.preventDefault();
+    if ( $("#saved-jobs-list").length ) {
+      $(this).addClass("clicked");
+      var jobInfoDiv = $(this).parent().siblings(".job")
+      new Job(jobInfoDiv).save();
+    } else {
+      alert("You must be signed in to do that!");
+    }
+  });
 }
 
 function preventForgetButtonPageRefresh(){
@@ -48,11 +57,6 @@ function saveAndRenderJob(e){
   e.preventDefault();
   e.stopPropagation();
 
-  if ( $("#saved-jobs-list").length ) {
-    $(this).addClass("clicked");
-    var jobInfoDiv = $(this).parent().siblings(".job")
-    new Job(jobInfoDiv).save();
-  } else {
-    alert("You must be signed in to do that!");
-  }
+  debugger
+
 }
