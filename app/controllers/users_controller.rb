@@ -6,8 +6,7 @@ class UsersController < ApplicationController
       log_in(@user)
       redirect_to feed_path
     else
-      # redirect with a flash error message
-      redirect_to feed_path
+      redirect_to feed_path, alert: "Invalid submission."
     end
   end
 

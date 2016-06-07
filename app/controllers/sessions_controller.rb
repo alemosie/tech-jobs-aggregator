@@ -2,9 +2,12 @@ class SessionsController < ApplicationController
 
   def create
     @user = User.find_by(username: params[:username])
-    return head(:forbidden) unless @user.authenticate(params[:password])
-    log_in(@user)
-    redirect_to feed_path
+    if !!@user && @user.authenticate(params[:password])
+      log_in(@user)
+      redirect_to feed_path, notice: "Welcome back!"
+    else
+      redirect_to feed_path, alert: "Login failed."
+    end
   end
 
   def destroy

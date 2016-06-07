@@ -2,13 +2,11 @@ class JobsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def create
-    @job = Job.new(job_params)
-    @job.user = current_user
+    @job = Job.new(job_params.merge(user: current_user))
     if @job.save
       respond_to { |format| format.js }
     else
-      # redirect with a flash error message
-      redirect_to feed_path
+      redirect_to feed_path, alert: "Something went wrong."
     end
   end
 
