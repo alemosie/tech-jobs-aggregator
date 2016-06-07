@@ -24,6 +24,8 @@ function getTransMode(transitInput){
     return google.maps.TravelMode.TRANSIT
   } else if (transitInput === "driving") {
     return google.maps.TravelMode.DRIVING
+  } else {
+    return google.maps.TravelMode.DRIVING
   }
 }
 

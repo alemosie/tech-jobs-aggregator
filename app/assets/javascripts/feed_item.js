@@ -95,6 +95,8 @@ function callback(response, status) {
           var sanitizedDestination = destination.split(/ \d+/)[0].replace(/,/g, '')
           destinationObject[sanitizedDestination] = duration + " away"
           addressesWithDuration.push(destinationObject);
+        } else {
+          item.distance = "No route available"
         }
       }
       addressesWithDuration.forEach(function(destinationObject){
