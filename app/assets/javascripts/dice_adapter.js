@@ -13,18 +13,20 @@ DiceAdapter.prototype.getData = function() {
   var _this = this;
   $.getJSON(this.searchUrl, function(response){
     var feedItems = []
+    var feedItemsToAppend = []
 
     // make new feed items, push into feed items array
+    // var feedItems = response.resultItemList.map(function(job) {
+    //   return new FeedItem(job);
+    // });
+
+    // getPlaceIdForFeedItem(feedItem, feedItems, response.count, _this.zip);
     response.resultItemList.forEach(function(job) {
       var feedItem = new FeedItem(job);
       getPlaceIdForFeedItem(feedItem, feedItems, response.count, _this.zip);
     });
 
-    // append feed items to div
     $('#dice-feed').append("<h4><i>Found " + response.count + " results</i></h4><br>")
-      feedItems.forEach(function(item){
-        $('#dice-feed').append( item.formatDiv() )
-    });
 
     // get moar dataz if necessary
     if (response.nextUrl !== undefined) {

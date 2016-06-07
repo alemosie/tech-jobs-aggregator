@@ -5,7 +5,12 @@ function FeedItem(json){
   this.datePosted = json.date;
   this.location   = json.location;
   this.placeID    = "";
+  this.googleCompanyName = "";
+  this.distance   = "";
+  FeedItem.all.push(this);
 }
+
+FeedItem.all = []
 
 // this often chops off text that we want to keep
 FeedItem.prototype.cleanPositionTitle = function(){
@@ -29,7 +34,11 @@ FeedItem.prototype.formatDatePosted = function(){
   var monthConversion = { "01": "January", "02": "Feburary", "03": "March", "04": "April", "05": "May", "06": "June", "07": "July", "08": "August", "09": "September", "10": "October", "11": "November", "12": "December" }
   var month = monthConversion[dates[1]]
   var formattedDate = month + " " + dates[2]
-  return '<i class="link-spacer"></i> <i class="fa fa-bookmark"></i> Posted on ' + formattedDate + '</p>';
+  return '<i class="link-spacer"></i> <i class="fa fa-bookmark"></i> Posted on ' + formattedDate;
+}
+
+FeedItem.prototype.formatDistance = function(){
+  '<i class="link-spacer"></i> <i class="fa fa-bookmark"></i>' + this.distance + ' away</p>';
 }
 
 FeedItem.prototype.formatSaveButton = function(){
@@ -41,41 +50,73 @@ function getPlaceIdForFeedItem(feedItem, feedItems, totalCount, originalZip) {
     query: feedItem.company + " near " + feedItem.location
   }
 
-  var service = new google.maps.places.PlacesService($('#google-places').get(0));
-  service.textSearch(textSearchRequest, function(results, status) {
+  var placesService = new google.maps.places.PlacesService($('#google-places').get(0));
+  placesService.textSearch(textSearchRequest, function(results, status) {
     if (status == google.maps.places.PlacesServiceStatus.OK) {
       feedItem.placeID = results[0].place_id;
-      console.log(feedItem.company + ": " + feedItem.placeID)
-    } else {
-      console.log(feedItem.company + "-- request failed " + status)
+      feedItem.googleCompanyName = results[0].name;
     }
 
     feedItems.push(feedItem);
+    feedItem.queryItems = feedItems;
+
     if (feedItems.length == totalCount) {
       var places = [];
       feedItems.forEach(function(item){
-        places.push({placeId: item.placeID});
+        if (item.placeID) {
+          places.push({placeId: item.placeID});
+        }
       })
-      // If we got here, we just processed the last feedItem
-      // So now, for each feedItem in feedItems, do the matrix.
-      var service = new google.maps.DistanceMatrixService();
-      debugger
-      service.getDistanceMatrix(
+
+      console.log(feedItems)
+      console.log(places)
+
+      // processed the last feedItem, so launch distance query
+      var distanceService = new google.maps.DistanceMatrixService();
+      distanceService.getDistanceMatrix(
         {
           origins: [originalZip],
           destinations: places,
           travelMode: google.maps.TravelMode.TRANSIT,
-        }, callback);
+        }, callback.bind(feedItems));
     }
   });
 }
 
 function callback(response, status) {
-   if (status == google.maps.DistanceMatrixStatus.OK) {
-     debugger
-   } else {
-     console.log(status) + "sadness"
-   }
+  this.forEach(function(item){
+    if (status == google.maps.DistanceMatrixStatus.OK) {
+      var addressesWithDuration = []
+      for (var index in response.destinationAddresses){
+        var destination = response.destinationAddresses[index]
+        var duration = response.rows[0].elements[index].duration.text
+        var destinationObject = {}
+        var sanitizedDestination = destination.split(/ \d+/)[0].replace(/,/g, '')
+        destinationObject[sanitizedDestination] = duration + " away" 
+        addressesWithDuration.push(destinationObject);
+      }
+      addressesWithDuration.forEach(function(destinationObject){
+        if (Object.keys(destinationObject)[0] === item.googleCompanyName){
+          item.distance = destinationObject[item.googleCompanyName];
+        }
+      })
+
+      // append feed items to div
+      $('#dice-feed').append(
+        '<article class="post"><div class="job post-preview col-xs-10 no-gutter">' +
+               item.formatPosition() +
+               item.formatCompany() +
+               item.formatLocation() +
+               item.formatDatePosted() + "<br>" +
+               item.distance +
+               '</div>' +
+               item.formatSaveButton() +
+               '<div id="map"></div>' +
+               '</article>' +
+               '<br>'
+      );
+    }
+  })
 }
 
 
@@ -85,7 +126,8 @@ FeedItem.prototype.formatDiv = function(){
          this.formatPosition() +
          this.formatCompany() +
          this.formatLocation() +
-         this.formatDatePosted() +
+         this.formatDatePosted() + " "
+         this.distance +
          '</div>' +
          this.formatSaveButton() +
          '<div id="map">Map here!</div>' +
