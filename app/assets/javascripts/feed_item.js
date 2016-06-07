@@ -38,7 +38,8 @@ FeedItem.prototype.getLocationOfCompany = function(){
 
 FeedItem.prototype.formatDiv = function(){
   // this.location = this.getLocationOfCompany();
-  return '<article class="post"><div class="job post-preview col-xs-10 no-gutter">' +
+  return '<article class="post">' +
+         '<div class="job post-preview col-xs-10 no-gutter">' +
          this.formatPosition() +
          this.formatCompany() +
          this.formatLocation() +

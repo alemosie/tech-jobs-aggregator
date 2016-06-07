@@ -25,23 +25,38 @@ Job.prototype.dataObj = function(){
 }
 
 Job.prototype.findPosition = function(){
-  return this.infoDiv.children(".job-title").children("a").text();
+  return this.infoDiv
+         .children(".job-title")
+         .children("a")
+         .text();
 }
 
 Job.prototype.findUrl = function(){
-  return this.infoDiv.children(".job-title").children("a").attr("href");
+  return this.infoDiv
+         .children(".job-title")
+         .children("a")
+         .attr("href");
 }
 
 Job.prototype.findCompany = function(){
-  return this.infoDiv.children(".job-company").text();
+  return this.infoDiv
+         .children(".job-company")
+         .text();
 }
 
 Job.prototype.findLocation = function(){
-  return this.infoDiv.children(".job-location").text().split("Posted on ")[0].trim();
+  return this.infoDiv
+         .children(".job-location")
+         .text()
+         .split("Posted on ")[0]
+         .trim();
 }
 
 Job.prototype.findDatePosted = function(){
-  return this.infoDiv.children(".job-location").text().split("Posted on ")[1];
+  return this.infoDiv
+         .children(".job-location")
+         .text()
+         .split("Posted on ")[1];
 }
 
 Job.prototype.findOriginalSearchTerm = function(){

@@ -2,4 +2,8 @@ var newSavedJob = "<%=j render partial: 'jobs/saved_job', locals: {job: @job} %>
 
 $('#saved-jobs-list').append(newSavedJob);
 
-$(".clicked").removeClass("btn-primary").addClass("btn-success").text("√").prop("disabled", true);
+$(".clicked")
+  .removeClass("btn-primary")
+  .addClass("btn-success")
+  .text("√")
+  .prop("disabled", true);
