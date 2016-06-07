@@ -41,8 +41,6 @@ DiceAdapter.prototype.appendFeedItems = function(response) {
     response.resultItemList.forEach(function(job){
       $('#dice-feed').append( new FeedItem(job).formatDiv() )
     })
-  } else {
-    $('#dice-feed').append("<h4><i>No results found</i></h4>")
   }
 }
 

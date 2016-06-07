@@ -11,10 +11,8 @@ PlacesAdapter.prototype.getPlaceID = function(){
 
 function callback(results, status) {
   var placeIDs = []
-  var numFeedItems = new DiceAdapter().jobs
   if (status == google.maps.places.PlacesServiceStatus.OK) {
     placeIDs.push(results[0].place_id);
-    debugger
     if (placeIDs.length === numFeedItems) {
        console.log("finished loading!")
     }

@@ -19,7 +19,6 @@ function preventForgetButtonPageRefresh(){
   })
 }
 
-
 function renderJobData(e){
   e.preventDefault();
   e.stopPropagation();

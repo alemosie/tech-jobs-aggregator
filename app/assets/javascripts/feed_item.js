@@ -24,7 +24,11 @@ FeedItem.prototype.formatLocation = function(){
 }
 
 FeedItem.prototype.formatDatePosted = function(){
-  return '<i class="link-spacer"></i> <i class="fa fa-bookmark"></i> Posted on ' + this.datePosted + '</p>';
+  var dates = this.datePosted.split("-")
+  var monthConversion = { "01": "January", "02": "Feburary", "03": "March", "04": "April", "05": "May", "06": "June", "07": "July", "08": "August", "09": "September", "10": "October", "11": "November", "12": "December" }
+  var month = monthConversion[dates[1]]
+  var formattedDate = month + " " + dates[2]
+  return '<i class="link-spacer"></i> <i class="fa fa-bookmark"></i> Posted on ' + formattedDate + '</p>';
 }
 
 FeedItem.prototype.formatSaveButton = function(){
@@ -43,6 +47,7 @@ FeedItem.prototype.formatDiv = function(){
          this.formatCompany() +
          this.formatLocation() +
          this.formatDatePosted() +
+         this.getLocationOfCompany() + 
          '</div>' +
          this.formatSaveButton() +
          '</article>' +
