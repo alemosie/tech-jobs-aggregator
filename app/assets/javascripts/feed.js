@@ -19,13 +19,23 @@ function preventForgetButtonPageRefresh(){
   })
 }
 
+function getTransMode(transitInput){
+  if (transitInput === "transit"){
+    return google.maps.TravelMode.TRANSIT
+  } else if (transitInput === "driving") {
+    return google.maps.TravelMode.DRIVING
+  }
+}
+
 function renderJobData(e){
   e.preventDefault();
   e.stopPropagation();
 
-  var skill = $("#skill").val()
-  var zip = $("#zip").val()
-  var adapter = new DiceAdapter(skill, zip);
+  var skill = $("#skill").val();
+  var zip = $("#zip").val();
+  var trans = $("#mode-of-transit").val();
+  var transMode = getTransMode(trans);
+  var adapter = new DiceAdapter(skill, zip, transMode);
 
   $("#dice-feed").empty();
   adapter.getData();

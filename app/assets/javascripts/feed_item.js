@@ -45,7 +45,7 @@ FeedItem.prototype.formatSaveButton = function(){
   return '<div class=" col-xs-2 no-gutter"><button class="save btn btn-primary btn-circle">+</button></div>'
 }
 
-function getPlaceIdForFeedItem(feedItem, feedItems, totalCount, originalZip) {
+function getPlaceIdForFeedItem(feedItem, feedItems, totalCount, originalZip, transitMode) {
   var textSearchRequest = {
     query: feedItem.company + " near " + feedItem.location
   }
@@ -77,7 +77,7 @@ function getPlaceIdForFeedItem(feedItem, feedItems, totalCount, originalZip) {
         {
           origins: [originalZip],
           destinations: places,
-          travelMode: google.maps.TravelMode.TRANSIT,
+          travelMode: transitMode,
         }, callback.bind(feedItems));
     }
   });
@@ -88,12 +88,14 @@ function callback(response, status) {
     if (status == google.maps.DistanceMatrixStatus.OK) {
       var addressesWithDuration = []
       for (var index in response.destinationAddresses){
-        var destination = response.destinationAddresses[index]
-        var duration = response.rows[0].elements[index].duration.text
-        var destinationObject = {}
-        var sanitizedDestination = destination.split(/ \d+/)[0].replace(/,/g, '')
-        destinationObject[sanitizedDestination] = duration + " away" 
-        addressesWithDuration.push(destinationObject);
+        if (response.rows[0].elements[index].status !== "ZERO_RESULTS") {
+          var destination = response.destinationAddresses[index]
+          var duration = response.rows[0].elements[index].duration.text
+          var destinationObject = {}
+          var sanitizedDestination = destination.split(/ \d+/)[0].replace(/,/g, '')
+          destinationObject[sanitizedDestination] = duration + " away"
+          addressesWithDuration.push(destinationObject);
+        }
       }
       addressesWithDuration.forEach(function(destinationObject){
         if (Object.keys(destinationObject)[0] === item.googleCompanyName){
