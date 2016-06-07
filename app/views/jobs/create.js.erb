@@ -1,3 +1,4 @@
+var jobID = "<%= @job.id %>"
 var newSavedJob = "<%=j render partial: 'jobs/saved_job', locals: {job: @job} %>";
 
 $("#no-saved-jobs").remove();
@@ -5,6 +6,7 @@ $("#no-saved-jobs").remove();
 $('#saved-jobs-list').append(newSavedJob);
 
 $(".clicked")
+  .attr("id", "saved-job-button-"+jobID)
   .removeClass("btn-primary")
   .addClass("btn-success")
   .text("√")

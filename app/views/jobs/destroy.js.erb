@@ -1,7 +1,18 @@
-var savedJobElementID = "#saved-job-" + "<%= @job.id %>";
+var savedJob = "#saved-job-" + "<%= @job.id %>";
+var savedJobButton = "#saved-job-button-" + "<%= @job.id %>";
 
-$(savedJobElementID).fadeOut();
+$(savedJob).fadeOut();
 
 setTimeout(function(){
-  $(savedJobElementID).remove();
+  $(savedJob).remove();
 }, 1000);
+
+if ( $("#dice-feed").has(savedJobButton).length )
+{
+  $(savedJobButton)
+    .removeAttr("id")
+    .removeClass("btn-success")
+    .addClass("btn-primary")
+    .text("+")
+    .prop("disabled", false);
+}
