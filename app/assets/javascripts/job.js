@@ -3,11 +3,10 @@ function Job(infoDiv){
 }
 
 Job.prototype.save = function(){
-  var data = this.dataObj();
   $.ajax({
     type: 'POST',
     url: '/jobs',
-    data: data,
+    data: this.dataObj(),
     dataType: 'script'
   })
 }
