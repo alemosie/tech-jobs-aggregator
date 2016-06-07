@@ -1,5 +1,7 @@
 var newSavedJob = "<%=j render partial: 'jobs/saved_job', locals: {job: @job} %>";
 
+$("#no-saved-jobs").remove();
+
 $('#saved-jobs-list').append(newSavedJob);
 
 $(".clicked")
