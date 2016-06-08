@@ -1,9 +1,14 @@
-function FeedItem(json){
+function FeedItem(json, feedIndex){
+  this.feedIndex  = feedIndex;
   this.position   = json.jobTitle;
   this.url        = json.detailUrl;
   this.company    = json.company;
   this.datePosted = json.date;
   this.location   = json.location;
+  this.placeID    = "";
+  this.formattedAddress = "";
+  this.googleName = "";
+  this.distance   = "";
 }
 
 // this often chops off text that we want to keep
@@ -24,22 +29,21 @@ FeedItem.prototype.formatLocation = function(){
 }
 
 FeedItem.prototype.formatDatePosted = function(){
-  return '<i class="link-spacer"></i> <i class="fa fa-bookmark"></i> Posted on ' + this.datePosted + '</p>';
+  var dates = this.datePosted.split("-")
+  var monthConversion = { "01": "January", "02": "Feburary", "03": "March", "04": "April", "05": "May", "06": "June", "07": "July", "08": "August", "09": "September", "10": "October", "11": "November", "12": "December" }
+  var month = monthConversion[dates[1]]
+  var formattedDate = month + " " + dates[2]
+  return ' <i class="fa fa-bookmark"></i> Posted on ' + formattedDate;
 }
 
 FeedItem.prototype.formatSaveButton = function(){
   return '<div class=" col-xs-2 no-gutter"><button class="save btn btn-primary btn-circle">+</button></div>'
 }
 
-FeedItem.prototype.getLocationOfCompany = function(){
-  var loc = new PlacesAdapter(this.company).getPlaceID();
-  return loc;
-}
-
 FeedItem.prototype.formatDiv = function(){
   // this.location = this.getLocationOfCompany();
   return '<article class="post">' +
-         '<div class="job post-preview col-xs-10 no-gutter">' +
+         '<div class="job post-preview col-xs-10 no-gutter" id=feed-item-' + this.feedIndex + '>' +
          this.formatPosition() +
          this.formatCompany() +
          this.formatLocation() +
