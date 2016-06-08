@@ -9,6 +9,7 @@ PlacesAdapter.prototype.findPlaceIDs = function(feedItem, itemsWithPlaceID, dice
   this.service.textSearch(this.textSearchRequest, function(results, status) { // search for place IDs
     if (status == google.maps.places.PlacesServiceStatus.OK) { // begin callback
       feedItem.placeID = results[0].place_id;
+      feedItem.formattedAddress = results[0].formatted_address;
       feedItem.googleName = results[0].name;
 
       itemsWithPlaceID.push(feedItem);  // to store newly enriched feed items

@@ -6,6 +6,7 @@ function FeedItem(json, feedIndex){
   this.datePosted = json.date;
   this.location   = json.location;
   this.placeID    = "";
+  this.formattedAddress = "";
   this.googleName = "";
   this.distance   = "";
 }
