@@ -15,19 +15,33 @@ function preventForgetButtonPageRefresh(){
   })
 }
 
+function updateAgeInput(val) {
+  document.getElementById('age').value=val;
+}
+
 function getTransMode(transitInput){
-  if (transitInput === "transit"){
-    return google.maps.TravelMode.TRANSIT
-  } else if (transitInput === "driving") {
-    return google.maps.TravelMode.DRIVING
-  } else {
-    return google.maps.TravelMode.DRIVING
+  switch(transitInput) {
+    case "Public transportation":
+      return google.maps.TravelMode.TRANSIT;
+      break;
+    case "Driving":
+      return google.maps.TravelMode.DRIVING
+      break;
+    case "Bicycling":
+      return google.maps.TravelMode.BICYCLING;
+      break;
+    case "Walking":
+      return google.maps.TravelMode.WALKING;
+      break;
+    default:
+      return google.maps.TravelMode.DRIVING;
   }
 }
 
 function renderJobData(e){
   e.preventDefault();
   e.stopPropagation();
+
   var skill = $("#skill").val()
   var zip = $("#zip").val()
   var age = $("#age").val();
@@ -35,6 +49,7 @@ function renderJobData(e){
   var transMode = getTransMode(trans);
 
   var adapter = new DiceAdapter(skill, zip, age, transMode);
+
   $("#dice-feed").empty();
   adapter.getData();
 }
@@ -51,9 +66,13 @@ function saveAndRenderJob(e){
   e.stopPropagation();
 
   if ( $("#saved-jobs-list").length ) {
-    var jobInfoDiv = $(this).parent().siblings(".job")
-    new Job(jobInfoDiv).save();
+
+    var jobInfoDiv, newJob;
+    jobInfoDiv = $(this).parent().siblings(".job")
+    newJob = new Job(jobInfoDiv)
+    newJob.save();
+
   } else {
-    alert("You must be signed in to do that!");
+    $(".select-categories").click();
   }
 }

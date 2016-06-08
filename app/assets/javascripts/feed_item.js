@@ -37,7 +37,7 @@ FeedItem.prototype.formatDatePosted = function(){
 }
 
 FeedItem.prototype.formatSaveButton = function(){
-  return '<div class=" col-xs-2 no-gutter"><button class="save btn btn-primary btn-circle">+</button></div>'
+  return '<div class="col-xs-2 no-gutter" align="right"><button class="save btn btn-primary btn-circle">+</button></div>'
 }
 
 FeedItem.prototype.formatDiv = function(){

@@ -1,9 +1,9 @@
 <%= form_for user do |f| %>
-  <%= f.text_field :username, class: "form-control", placeholder:"Enter username" %>
-  <%= f.text_field :name, class: "form-control", placeholder:"Enter name" %>
-  <%= f.text_field :email, class: "form-control", placeholder:"Enter email" %>
-  <%= f.password_field :password, class: "form-control", placeholder:"Enter password" %>
-  <%= f.password_field :password_confirmation, class: "form-control", placeholder:"Confirm password" %>
+  <%= f.text_field :username, class: "form-control", placeholder:"Enter username", required: true %>
+  <%= f.text_field :name, class: "form-control", placeholder:"Enter name", required: true %>
+  <%= f.text_field :email, class: "form-control", placeholder:"Enter email", required: true %>
+  <%= f.password_field :password, class: "form-control", placeholder:"Enter password", required: true %>
+  <%= f.password_field :password_confirmation, class: "form-control", placeholder:"Confirm password", required: true %>
   <%= f.submit "Create Your Account" %>
 <% end %>
 
