@@ -17,14 +17,11 @@ function DistanceMatrixAdapter(itemsWithPlaceID, diceResponse, queryParams){
   var distanceService = new google.maps.DistanceMatrixService();
   var i = 0;
   placeIDSections.forEach(function(section){
-    setTimeout(function(){
-      distanceService.getDistanceMatrix({
-        origins: [queryParams.zip],
-        destinations: section,
-        travelMode: queryParams.transit,
-      }, callback.bind(itemsWithPlaceID))
-    }, i*1100);
-    i++;
+    distanceService.getDistanceMatrix({
+      origins: [queryParams.zip],
+      destinations: section,
+      travelMode: queryParams.transit,
+    }, callback.bind(itemsWithPlaceID))
   });
 }
 
