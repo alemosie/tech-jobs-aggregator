@@ -1,6 +1,6 @@
 function DistanceMatrixAdapter(itemsWithPlaceID, diceResponse, queryParams){
   var places = [];
-  console.log(itemsWithPlaceID);
+
   itemsWithPlaceID.forEach(function(item){ // create place ID objects for distance query
     if (item.placeID) {
       places.push({placeId: item.placeID});
@@ -13,18 +13,16 @@ function DistanceMatrixAdapter(itemsWithPlaceID, diceResponse, queryParams){
       realPlaces.push(place);
     }
   });
+
   var placeIDSections = splitItemsForDistanceQuery(realPlaces); // create sections max 25 for distance query
   var distanceService = new google.maps.DistanceMatrixService();
-  var i = 0;
+
   placeIDSections.forEach(function(section){
-    setTimeout(function(){
-      distanceService.getDistanceMatrix({
-        origins: [queryParams.zip],
-        destinations: section,
-        travelMode: queryParams.transit,
-      }, callback.bind(itemsWithPlaceID))
-    }, i*1100);
-    i++;
+    distanceService.getDistanceMatrix({
+      origins: [queryParams.zip],
+      destinations: section,
+      travelMode: queryParams.transit,
+    }, callback.bind(itemsWithPlaceID));
   });
 }
 
