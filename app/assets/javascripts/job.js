@@ -16,7 +16,6 @@ Job.prototype.update = function(){
 }
 
 Job.prototype.dataObj = function(){
-  debugger;
   return { "job":
     {
       "position": this.findPosition(),
