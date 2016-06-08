@@ -6,9 +6,7 @@ function PlacesAdapter(feedItem){
 }
 
 PlacesAdapter.prototype.findPlaceIDs = function(feedItem, itemsWithPlaceID, diceResponse, queryParams) {
-  var _this = this;
-  setTimeout(function(){
-    _this.service.textSearch(_this.textSearchRequest, function(results, status) { // search for place IDs
+  this.service.textSearch(this.textSearchRequest, function(results, status) { // search for place IDs
       if (status == google.maps.places.PlacesServiceStatus.OK) { // begin callback
         feedItem.placeID = results[0].place_id;
         feedItem.formattedAddress = results[0].formatted_address;
@@ -24,5 +22,4 @@ PlacesAdapter.prototype.findPlaceIDs = function(feedItem, itemsWithPlaceID, dice
         new DistanceMatrixAdapter(itemsWithPlaceID, diceResponse, queryParams);
       }
     });
-  }, 200);
 }
