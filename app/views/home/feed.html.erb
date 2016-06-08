@@ -1,17 +1,28 @@
 <br><br>
 <form id="job-search">
-
-  <fieldset class="form-group">
-    <input type="text" class="form-control" id="skill" placeholder="What skill do you have? (e.g. Ruby, Python)" required>
-  </fieldset>
-  <fieldset class="form-group">
-    <input type="text" class="form-control" id="zip" placeholder="What's your zipcode?" required>
-  </fieldset>
-  <fieldset class="form-group">
-    <input type="text" class="form-control" id="mode-of-transit" placeholder="How are you getting there? (TRANSIT or DRIVING)">
-  </fieldset>
-  <fieldset class="form-group">
-    <input type="text" class="form-control" id="age" placeholder="What's your limit for job post age? (in days)">
+  <article class="post-favorite col-xs-12 col-sm-6 ">
+    <fieldset class="form-group" action="demoform.asp">
+      <input type="text" class="form-control" id="skill" placeholder="What are you searching for? (e.g. Ruby, Python)" required>
+    </fieldset>
+    <fieldset class="form-group">
+      <br>
+      <input type="text" class="form-control" id="zip" placeholder="What's your zipcode?" required>
+    </fieldset>
+  </article>
+  <article class="post-favorite col-xs-12 col-sm-6 ">
+    <fieldset>
+      <!-- <p class="meta" style="color: rgb(204,204,204); font-size:14px;" >Time to query:</p> -->
+      <input type="text" class="form-control" id="age" placeholder="How far back? (number of days)">
+      <br><br>
+      <!-- <p class="meta" style="color: rgb(204,204,204); font-size:14px;" >Mode of transportation:</p> -->
+      <select class="form-control" id="mode-of-transit">
+        <option>Public transportation</option>
+        <option>Driving</option>
+        <option>Bicycling</option>
+        <option>Walking</option>
+      </select>
+    </fieldset>
+    </article>
     <input type="submit" value="Find a job!">
 </form>
 <br><br>

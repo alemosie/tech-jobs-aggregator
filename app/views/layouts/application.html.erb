@@ -10,6 +10,11 @@
   <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= csrf_meta_tags %>
 
+  <!-- javascript dependencies -->
+  <%= javascript_include_tag 'application' %>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+
   <!-- google places library -->
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<%=ENV["places_api_key"]%>&libraries=places"></script>
   <meta name="description" content="">
@@ -31,7 +36,7 @@
         <div class="site-info">
           <div class="primary-info">
             <h1><%= image_tag 'up-arrow-circle-hi.png', size: "32",  :style => "margin-bottom: 5px" %> Technup</h1>
-            <p>A simple tool to find you a not-so-simple job.</p>
+            <p>Be the developer that your city needs.</p>
             <!-- where google places will fake render textSearch results -->
             <div id="google-map"></div>
           </div>
@@ -47,34 +52,35 @@
 
         <div class="sub-nav">
           <a href="#" class="select-posts active">Jobs</a>
-          <a href="#" class="select-categories">Saved Jobs</a>
+          <% if logged_in? %>
+            <a href="#" class="select-categories">Saved Jobs</a>
+          <% else %>
+            <a href="#" class="select-categories">Log In</a>
+          <% end %>
         </div>
 
         <div class="home-page-posts animated fadeIn">
 
           <%= yield %>
           <!-- enter job feed here -->
-
         </div>
 
         <div class="home-page-categories hide animated fadeIn ">
           <div class="category row">
             <section>
-              <%= render partial: "home/user_forms", locals: {user: @user, jobs: @jobs} %>
+              <%= render partial: "home/form_toggle", locals: {user: @user, jobs: @jobs} %>
             </section>
           </div>
         </div>
         <footer class="split-footer">
-          <a href="https://github.com/alemosie/tech-jobs-aggregator">Made by Duncan & Alex @ the Flatiron School</a>
-          <!-- <i class="link-spacer"></i> -->
+          <% if logged_in? %>
+            <p class="login-info">signed in as: <%=@user.name%>, email: <%= @user.email %></i>&nbsp;&nbsp;<i class="link-spacer"></i>&nbsp;&nbsp;<%= link_to "Log Out", logout_path, method: :delete %>
+          <% end %>
+          <br><a href="https://github.com/alemosie/tech-jobs-aggregator">Made by Duncan & Alex @ the Flatiron School</a></p>
         </footer>
       </section><!-- main content -->
     </div> <!--/row -->
   </main> <!-- /container -->
-
-  <%= javascript_include_tag 'application' %>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-  <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
 
 </body>
 </html>
