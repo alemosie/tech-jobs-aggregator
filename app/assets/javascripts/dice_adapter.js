@@ -1,9 +1,10 @@
-function DiceAdapter(skill, zip) {
+function DiceAdapter(skill, zip, age) {
   this.skill = skill;
   this.zip   = zip;
+  this.age   = age;
   this.skillQuery = "skill=" + this.slugify(skill);
   this.zipQuery   = "city=" + this.zip;
-  this.ageQuery   = "age=30";
+  this.ageQuery   = "age=" + this.age;
   this.baseUrl = "http://service.dice.com/api/rest/jobsearch/v1/simple.json?";
   this.searchUrl = this.baseUrl + this.skillQuery + "&" + this.zipQuery + "&sort=1&" + this.ageQuery;
 }

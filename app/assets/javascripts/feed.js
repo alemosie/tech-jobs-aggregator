@@ -24,9 +24,10 @@ function renderJobData(e){
   e.preventDefault();
   e.stopPropagation();
 
-  var skill = $("#skill").val()
-  var zip = $("#zip").val()
-  var adapter = new DiceAdapter(skill, zip);
+  var skill = $("#skill").val();
+  var zip = $("#zip").val();
+  var age = $("#age").val();
+  var adapter = new DiceAdapter(skill, zip, age);
 
   $("#dice-feed").empty();
   adapter.getData();
