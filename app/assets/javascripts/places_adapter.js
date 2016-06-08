@@ -5,13 +5,13 @@ function PlacesAdapter(feedItem){
   this.service = new google.maps.places.PlacesService($('#google-map').get(0));
 }
 
-PlacesAdapter.prototype.findPlaceIDs = function(feedItem, itemsWithPlaceID, diceResponse, queryItems) {
+PlacesAdapter.prototype.findPlaceIDs = function(feedItem, itemsWithPlaceID, diceResponse, queryParams) {
   this.service.textSearch(this.textSearchRequest, function(results, status) { // search for place IDs
+    // set Timeout
     if (status == google.maps.places.PlacesServiceStatus.OK) { // begin callback
       feedItem.placeID = results[0].place_id;
       feedItem.formattedAddress = results[0].formatted_address;
       feedItem.googleName = results[0].name;
-
       itemsWithPlaceID.push(feedItem);  // to store newly enriched feed items
     } else {
       feedItem.placeID = status;
@@ -20,7 +20,7 @@ PlacesAdapter.prototype.findPlaceIDs = function(feedItem, itemsWithPlaceID, dice
     }
 
     if (itemsWithPlaceID.length === diceResponse.count){ // if all placeIDs retrieved
-      new DistanceMatrixAdapter(itemsWithPlaceID, diceResponse, queryItems);
+      new DistanceMatrixAdapter(itemsWithPlaceID, diceResponse, queryParams);
     }
   });
 }

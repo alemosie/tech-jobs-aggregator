@@ -1,5 +1,5 @@
 function FeedItem(json, feedIndex){
-  this.feedIndex  = feedIndex
+  this.feedIndex  = feedIndex;
   this.position   = json.jobTitle;
   this.url        = json.detailUrl;
   this.company    = json.company;
