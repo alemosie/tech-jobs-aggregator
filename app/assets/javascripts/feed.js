@@ -54,9 +54,7 @@ function saveAndRenderJob(e){
 
   if ( $("#saved-jobs-list").length ) {
     var jobInfoDiv = $(this).parent().siblings(".job")
-    debugger;
     var newJob = new Job(jobInfoDiv)
-    debugger;
     newJob.save();
   } else {
     alert("You must be signed in to do that!");
