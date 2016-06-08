@@ -7,5 +7,5 @@ class Job < ActiveRecord::Base
                         :date_posted,
                         :url,
                         :original_search_term,
-                        :user
+                        :user                  
 end

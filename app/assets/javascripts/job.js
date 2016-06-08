@@ -16,6 +16,7 @@ Job.prototype.update = function(){
 }
 
 Job.prototype.dataObj = function(){
+  debugger;
   return { "job":
     {
       "position": this.findPosition(),
@@ -23,6 +24,7 @@ Job.prototype.dataObj = function(){
       "company": this.findCompany(),
       "location": this.findLocation(),
       "date_posted": this.findDatePosted(),
+      "distance": this.findDistance(),
       "original_search_term": this.findOriginalSearchTerm()
     }
   }
@@ -61,6 +63,10 @@ Job.prototype.findDatePosted = function(){
          .children(".job-location")
          .text()
          .split("Posted on ")[1];
+}
+
+Job.prototype.findDistance = function(){
+  return this.infoDiv.children(".job-distance").text()
 }
 
 Job.prototype.findOriginalSearchTerm = function(){
