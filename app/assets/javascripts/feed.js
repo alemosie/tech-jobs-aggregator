@@ -53,10 +53,12 @@ function saveAndRenderJob(e){
   e.stopPropagation();
 
   if ( $("#saved-jobs-list").length ) {
+
     var jobInfoDiv, newJob;
     jobInfoDiv = $(this).parent().siblings(".job")
     newJob = new Job(jobInfoDiv)
     newJob.save();
+    
   } else {
     alert("You must be signed in to do that!");
   }
