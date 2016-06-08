@@ -54,6 +54,6 @@ function saveAndRenderJob(e){
     var jobInfoDiv = $(this).parent().siblings(".job")
     new Job(jobInfoDiv).save();
   } else {
-    alert("You must be signed in to do that!");
+    $(".select-categories").click();
   }
 }
