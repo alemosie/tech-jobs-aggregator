@@ -18,7 +18,7 @@ class JobsController < ApplicationController
   private
 
     def job_params
-      params.require(:job).permit(:position, :url, :company, :location, :date_posted, :original_search_term)
+      params.require(:job).permit(:position, :url, :company, :location, :date_posted, :distance, :original_search_term)
     end
 
 end
