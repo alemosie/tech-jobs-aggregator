@@ -11,6 +11,10 @@ Job.prototype.save = function(){
   })
 }
 
+Job.prototype.update = function(){
+
+}
+
 Job.prototype.dataObj = function(){
   return { "job":
     {

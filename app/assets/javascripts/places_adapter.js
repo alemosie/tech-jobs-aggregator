@@ -1,4 +1,4 @@
-function PlacesAdapter(company, zip){
+function PlacesAdapter(feedItem, diceResponse, queryItems){
   this.textSearchRequest = {
     query: company + " near " + zip
   }

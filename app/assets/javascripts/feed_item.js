@@ -38,9 +38,9 @@ FeedItem.prototype.formatSaveButton = function(){
   return '<div class=" col-xs-2 no-gutter"><button class="save btn btn-primary btn-circle">+</button></div>'
 }
 
-FeedItem.prototype.getLocationOfCompany = function(){
-  var loc = new PlacesAdapter(this).getPlaceID();
-  return loc;
+FeedItem.prototype.getDistance = function(diceResponse, queryItems){
+  new PlacesAdapter(this, diceResponse, queryItems)
+  // return loc;
 }
 
 FeedItem.prototype.formatDiv = function(){
