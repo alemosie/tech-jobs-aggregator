@@ -52,7 +52,6 @@ function saveAndRenderJob(e){
   e.stopPropagation();
 
   if ( $("#saved-jobs-list").length ) {
-    $(this).addClass("clicked");
     var jobInfoDiv = $(this).parent().siblings(".job")
     new Job(jobInfoDiv).save();
   } else {
