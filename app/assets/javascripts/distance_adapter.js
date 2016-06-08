@@ -47,7 +47,7 @@ function callback(response, status){
       } else {
         _this[feedItemIndex].distance = "No route available"
       }
-      $("#feed-item-" + feedItemIndex).find("p").append('<br>' + _this[feedItemIndex].distance);
+      $("#feed-item-" + feedItemIndex).find(".job-distance").append(_this[feedItemIndex].distance);
       feedItemIndex++;
     }
   }

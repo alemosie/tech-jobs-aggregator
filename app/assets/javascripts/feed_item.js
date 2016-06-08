@@ -48,6 +48,7 @@ FeedItem.prototype.formatDiv = function(){
          this.formatCompany() +
          this.formatLocation() +
          this.formatDatePosted() +
+         '<p class="meta job-distance"></p>' +
          '</div>' +
          this.formatSaveButton() +
          '</article>' +
