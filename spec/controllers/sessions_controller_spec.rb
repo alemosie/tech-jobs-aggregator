@@ -2,10 +2,6 @@ require 'rails_helper'
 
 RSpec.describe SessionsController, :type => :controller do
 
-  before do
-    User.destroy_all
-  end
-
   let(:user) { User.create(username: "chacha", name: "cha", email: "cha@chacha.com", password: "password")}
 
   describe '#create' do
