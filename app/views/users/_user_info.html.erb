@@ -1,5 +1,3 @@
-<p class="login-info">signed in as: <%=@user.name%>, email: <%= @user.email %></i>&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to "Log Out", logout_path, method: :delete %></p>
-
 <h1>Hiya, <%= @user.name.capitalize %>!</h1>
 <br>
 <h2 class="favorites">Saved jobs</h2>
@@ -14,7 +12,7 @@
   <% else %>
 
     <div class="col-sm-12" id="no-saved-jobs">
-        <p class="meta">No jobs yet -- save jobs to access them later</p>
+        <p class="meta">No jobs yet; save jobs to access them later.</p>
     </div>
 
   <% end %>
