@@ -15,10 +15,14 @@ function preventForgetButtonPageRefresh(){
   })
 }
 
+function updateAgeInput(val) {
+  document.getElementById('age').value=val;
+}
+
 function getTransMode(transitInput){
-  if (transitInput === "transit"){
+  if (transitInput === "Public transportation"){
     return google.maps.TravelMode.TRANSIT
-  } else if (transitInput === "driving") {
+  } else if (transitInput === "Driving") {
     return google.maps.TravelMode.DRIVING
   } else {
     return google.maps.TravelMode.DRIVING
@@ -58,7 +62,7 @@ function saveAndRenderJob(e){
     jobInfoDiv = $(this).parent().siblings(".job")
     newJob = new Job(jobInfoDiv)
     newJob.save();
-    
+
   } else {
     $(".select-categories").click();
   }

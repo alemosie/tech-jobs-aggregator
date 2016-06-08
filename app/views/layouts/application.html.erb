@@ -10,6 +10,10 @@
   <%= stylesheet_link_tag 'application', media: 'all' %>
   <%= csrf_meta_tags %>
 
+  <%= javascript_include_tag 'application' %>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+
   <!-- google places library -->
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<%=ENV["places_api_key"]%>&libraries=places"></script>
   <meta name="description" content="">
@@ -76,10 +80,6 @@
       </section><!-- main content -->
     </div> <!--/row -->
   </main> <!-- /container -->
-
-  <%= javascript_include_tag 'application' %>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-  <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
 
 </body>
 </html>
