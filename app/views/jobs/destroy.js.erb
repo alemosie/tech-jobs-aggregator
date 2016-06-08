@@ -1,18 +1,24 @@
-var savedJob = "#saved-job-" + "<%= @job.id %>";
-var savedJobButton = "#saved-job-button-" + "<%= @job.id %>";
+var jobID = <%=@job.id.to_s%>;
+var savedJob = "#saved-job-" + jobID;
+var savedJobButton = "#saved-job-button-" + jobID;
 
-$(savedJob).fadeOut();
-
-setTimeout(function(){
-  $(savedJob).remove();
-}, 1000);
-
-if ( $(savedJobButton).length )
-{
-  $(savedJobButton)
-    .removeAttr("id")
-    .removeClass("btn-success")
-    .addClass("btn-primary")
-    .text("+")
-    .prop("disabled", false);
+function remove(job){
+  setTimeout(function(){ $(job).remove() }, 1000);
+  $(job).fadeOut();
 }
+
+function resetIfNecessary(button){
+  if ( $(button).length )
+  {
+    $(button)
+      .removeAttr("id")
+      .removeClass("btn-success")
+      .addClass("btn-primary")
+      .text("+")
+      .prop("disabled", false);
+  }
+}
+
+
+remove(savedJob);
+resetIfNecessary(savedJobButton);

@@ -1,13 +1,31 @@
-var jobID = "<%= @job.id %>"
+var jobID       = "<%= @job.id %>";
+var jobPosition = "<%= @job.position %>";
 var newSavedJob = "<%=j render partial: 'jobs/saved_job', locals: {job: @job} %>";
 
-$("#no-saved-jobs").remove();
+function append(job){
+  if ( $("#no-saved-jobs").length ){
+    $("#no-saved-jobs").remove();
+  }
+  $('#saved-jobs-list').append(job);
+}
 
-$('#saved-jobs-list').append(newSavedJob);
+function findClickedButton(position){
+  return $(
+            $('article:contains("'+ position +'")')
+            .children()[1]
+          )
+          .children(".btn")
+}
 
-$(".clicked")
-  .attr("id", "saved-job-button-"+jobID)
-  .removeClass("btn-primary")
-  .addClass("btn-success")
-  .text("√")
-  .prop("disabled", true);
+function changeClickedButton(button, ID){
+  $(button)
+    .attr("id", "saved-job-button-"+ID)
+    .removeClass("btn-primary")
+    .addClass("btn-success")
+    .text("√")
+    .prop("disabled", true);
+}
+
+
+append(newSavedJob);
+changeClickedButton( findClickedButton(jobPosition), jobID );
