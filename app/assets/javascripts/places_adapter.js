@@ -1,35 +1,28 @@
-function PlacesAdapter(company, zip){
+function PlacesAdapter(feedItem){
   this.textSearchRequest = {
-    query: company + " near " + zip
+    query: feedItem.company + " near " + feedItem.location
   }
+  this.service = new google.maps.places.PlacesService($('#google-map').get(0));
 }
 
-PlacesAdapter.prototype.getPlaceID = function(){
-  var service = new google.maps.places.PlacesService($('#google-places').get(0));
-  service.textSearch(this.textSearchRequest, callback);
-}
+PlacesAdapter.prototype.findPlaceIDs = function(feedItem, itemsWithPlaceID, diceResponse, queryParams) {
+  setTimeout(function(){
+    this.service.textSearch(this.textSearchRequest, function(results, status) { // search for place IDs
+      if (status == google.maps.places.PlacesServiceStatus.OK) { // begin callback
+        feedItem.placeID = results[0].place_id;
+        feedItem.formattedAddress = results[0].formatted_address;
+        feedItem.googleName = results[0].name;
+        console.log(item);
+        itemsWithPlaceID.push(feedItem);  // to store newly enriched feed items
+      } else {
+        feedItem.placeID = status;
+        feedItem.googleName = status;
+        itemsWithPlaceID.push(feedItem);
+      }
 
-function callback(results, status) {
-  var placeIDs = []
-  var numFeedItems = new DiceAdapter().jobs
-  if (status == google.maps.places.PlacesServiceStatus.OK) {
-    placeIDs.push(results[0].place_id);
-    debugger
-    if (placeIDs.length === numFeedItems) {
-       console.log("finished loading!")
-    }
-  }
+      if (itemsWithPlaceID.length === diceResponse.count){ // if all placeIDs retrieved
+        new DistanceMatrixAdapter(itemsWithPlaceID, diceResponse, queryParams);
+      }
+    });
+  }, 200);
 }
-
-// PlacesAdapter.prototype.getLocationData = function(){
-  // url = "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=" + this.company + "&key=#{ENV["places_api_key"]}"
-//   $.ajax({
-//     url: url,
-//     type: 'get',
-//     dataType: 'json',
-//     success: function(response){
-//       // response.addHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-//       debugger
-//     }
-//   })
-// }
