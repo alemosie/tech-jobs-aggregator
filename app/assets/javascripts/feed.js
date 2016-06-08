@@ -28,6 +28,7 @@ function getTransMode(transitInput){
 function renderJobData(e){
   e.preventDefault();
   e.stopPropagation();
+
   var skill = $("#skill").val()
   var zip = $("#zip").val()
   var age = $("#age").val();
@@ -35,6 +36,7 @@ function renderJobData(e){
   var transMode = getTransMode(trans);
 
   var adapter = new DiceAdapter(skill, zip, age, transMode);
+
   $("#dice-feed").empty();
   adapter.getData();
 }
@@ -52,7 +54,10 @@ function saveAndRenderJob(e){
 
   if ( $("#saved-jobs-list").length ) {
     var jobInfoDiv = $(this).parent().siblings(".job")
-    new Job(jobInfoDiv).save();
+    debugger;
+    var newJob = new Job(jobInfoDiv)
+    debugger;
+    newJob.save();
   } else {
     alert("You must be signed in to do that!");
   }
