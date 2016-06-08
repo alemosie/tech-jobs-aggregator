@@ -20,12 +20,21 @@ function updateAgeInput(val) {
 }
 
 function getTransMode(transitInput){
-  if (transitInput === "Public transportation"){
-    return google.maps.TravelMode.TRANSIT
-  } else if (transitInput === "Driving") {
-    return google.maps.TravelMode.DRIVING
-  } else {
-    return google.maps.TravelMode.DRIVING
+  switch(transitInput) {
+    case "Public transportation":
+      return google.maps.TravelMode.TRANSIT;
+      break;
+    case "Driving":
+      return google.maps.TravelMode.DRIVING
+      break;
+    case "Bicycling":
+      return google.maps.TravelMode.BICYCLING;
+      break;
+    case "Walking":
+      return google.maps.TravelMode.WALKING;
+      break;
+    default:
+      return google.maps.TravelMode.DRIVING;
   }
 }
 
