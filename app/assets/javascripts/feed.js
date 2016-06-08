@@ -28,14 +28,13 @@ function getTransMode(transitInput){
 function renderJobData(e){
   e.preventDefault();
   e.stopPropagation();
-
   var skill = $("#skill").val()
   var zip = $("#zip").val()
+  var age = $("#age").val();
   var trans = $("#mode-of-transit").val();
   var transMode = getTransMode(trans);
 
-  var adapter = new DiceAdapter(skill, zip, transMode);
-
+  var adapter = new DiceAdapter(skill, zip, age, transMode);
   $("#dice-feed").empty();
   adapter.getData();
 }

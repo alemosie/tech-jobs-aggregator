@@ -1,12 +1,13 @@
-function DiceAdapter(skill, zip, trans) {
+function DiceAdapter(skill, zip, age, trans) {
   this.params = {} // gathering query items
   this.params["skill"] = skill;
   this.params["zip"] = zip;
   this.params["transit"] = trans;
+  this.params["age"] = age;
 
   this.skillQuery = "skill=" + this.slugify(skill);
-  this.zipQuery   = "city=" + this.params["zip"];
-  this.ageQuery   = "age=30";
+  this.zipQuery   = "city=" + zip;
+  this.ageQuery   = "age=" + age;
   this.baseUrl = "http://service.dice.com/api/rest/jobsearch/v1/simple.json?";
   this.searchUrl = this.baseUrl + this.skillQuery + "&" + this.zipQuery + "&sort=1&" + this.ageQuery;
 }
