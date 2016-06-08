@@ -2,8 +2,6 @@ require 'rails_helper'
 
 describe JobsController, type: :controller do
 
-  after(:all) { Job.destroy_all; User.destroy_all }
-
   let(:request_params) do
     { job:
       {

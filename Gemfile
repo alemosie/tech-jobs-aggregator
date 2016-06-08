@@ -39,6 +39,8 @@ group :development, :test do
   gem 'rspec-rails'
   gem "jasmine"
   gem "capybara"
+  gem "database_cleaner"
+  gem "selenium-webdriver", "~> 2.48.0"
 end
 
 group :development do

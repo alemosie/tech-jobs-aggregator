@@ -7,7 +7,7 @@ setTimeout(function(){
   $(savedJob).remove();
 }, 1000);
 
-if ( $("#dice-feed").has(savedJobButton).length )
+if ( $(savedJobButton).length )
 {
   $(savedJobButton)
     .removeAttr("id")
