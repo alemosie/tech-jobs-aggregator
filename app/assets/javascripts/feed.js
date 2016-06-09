@@ -15,29 +15,6 @@ function preventForgetButtonPageRefresh(){
   })
 }
 
-function updateAgeInput(val) {
-  document.getElementById('age').value=val;
-}
-
-function getTransMode(transitInput){
-  switch(transitInput) {
-    case "Public transportation":
-      return google.maps.TravelMode.TRANSIT;
-      break;
-    case "Driving":
-      return google.maps.TravelMode.DRIVING
-      break;
-    case "Bicycling":
-      return google.maps.TravelMode.BICYCLING;
-      break;
-    case "Walking":
-      return google.maps.TravelMode.WALKING;
-      break;
-    default:
-      return google.maps.TravelMode.DRIVING;
-  }
-}
-
 function renderJobData(e){
   e.preventDefault();
   e.stopPropagation();
@@ -74,4 +51,27 @@ function saveAndRenderJob(e){
   } else {
     $(".select-categories").click();
   }
+}
+
+function getTransMode(transitInput){
+  switch(transitInput) {
+    case "Public transportation":
+      return google.maps.TravelMode.TRANSIT;
+      break;
+    case "Driving":
+      return google.maps.TravelMode.DRIVING
+      break;
+    case "Bicycling":
+      return google.maps.TravelMode.BICYCLING;
+      break;
+    case "Walking":
+      return google.maps.TravelMode.WALKING;
+      break;
+    default:
+      return google.maps.TravelMode.DRIVING;
+  }
+}
+
+function updateAgeInput(val) {
+  document.getElementById('age').value=val;
 }
