@@ -43,9 +43,9 @@ function saveAndRenderJob(e){
 
   if ( $("#saved-jobs-list").length ) {
 
-    var jobInfoDiv, newJob;
-    jobInfoDiv = $(this).parent().siblings(".job")
-    newJob = new Job(jobInfoDiv)
+    var jobInfoDiv = $(this).parent().siblings(".job");
+    var newJob = new Job(jobInfoDiv);
+
     newJob.save();
 
   } else {
