@@ -11,22 +11,19 @@ describe "Saving and deleting jobs" do
     it "the button changes", js: true do
       User.create!(username: username, name: "Duncan", email: "me@jobs.com", password: password)
       visit "/"
-      click_on "Saved Jobs"
+      click_on "Log In"
       fill_in "username", with: username
       fill_in "password", with: password
-      click_on "Log In"
-      expect(page).to have_content "Technup"
+      click_link "Log In"
 
-      click_on "Saved Jobs"
-      expect(page).to have_content "Hiya, Duncan!"
+      # click_on "Jobs"
+      # expect(page).to have_content "Technup"
+      # fill_in "skill", with: "sql"
+      # fill_in "zip", with: "11233"
+      # click_on "Find a job!"
+      # expect(page).to have_selector "article.post"
 
-      click_on "Jobs"
-      fill_in "skill", with: "sql"
-      fill_in "zip", with: "11233"
-      click_on "Find a job!"
-      expect(page).to have_selector "article.post"
-
-      first(".save").click
+      # first(".save").click
       #wait_for_ajax
 
       # expect( first(".save").click ).to eq("ok")
