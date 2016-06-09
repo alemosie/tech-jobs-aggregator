@@ -1,25 +1,20 @@
-function PlacesAdapter(feedItem){
-  this.textSearchRequest = {
-    query: feedItem.company + " near " + feedItem.location
-  }
-  this.service = new google.maps.places.PlacesService($('#google-map').get(0));
-}
-
-PlacesAdapter.prototype.findPlaceIDs = function(feedItem, itemsWithPlaceID, diceResponse, queryParams) {
-  this.service.textSearch(this.textSearchRequest, function(results, status) { // search for place IDs
+function PlacesAdapter(feedItem, places, diceResponse, queryParams, i) {
+  var textSearchRequest = { query: feedItem.company + " near " + feedItem.location};
+  var service = new google.maps.places.PlacesService($('#google-map').get(0));
+  setTimeout(function() {
+    console.log("calling places api");
+    service.textSearch(textSearchRequest, function(results, status) { // search for place IDs
       if (status == google.maps.places.PlacesServiceStatus.OK) { // begin callback
         feedItem.placeID = results[0].place_id;
-        feedItem.formattedAddress = results[0].formatted_address;
         feedItem.googleName = results[0].name;
-
-        itemsWithPlaceID.push(feedItem);  // to store newly enriched feed items
+        places.push({placeId: results[0].place_id, index: i});  // to store newly enriched feed items
       } else {
-        feedItem.placeID = status;
+        feedItem.placeID = "ZERO_RESULTS";
         feedItem.googleName = status;
-        itemsWithPlaceID.push(feedItem);
+        places.push({placeId: "ZERO_RESULTS", index: i});
       }
-      if (itemsWithPlaceID.length === diceResponse.count){ // if all placeIDs retrieved
-        new DistanceMatrixAdapter(itemsWithPlaceID, diceResponse, queryParams);
+      if (places.length === diceResponse.count){ // if all placeIDs retrieved
+        new DistanceMatrixAdapter(places, diceResponse, queryParams);
       }
-    });
+    })}, 200*i);
 }

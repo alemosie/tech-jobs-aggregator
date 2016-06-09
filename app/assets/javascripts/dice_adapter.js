@@ -29,12 +29,11 @@ DiceAdapter.prototype.appendFeedItems = function(response) {
   var _this = this;
   if (response.count > 0) {
     $('#dice-feed').append("<h4><i>Found " + response.count + " results</i></h4><br>")
-    var itemsWithPlaceID = []; // to store feed items with place ids outside of calls
+    var places = []; // to store feed items with place ids outside of calls
     var i = 0
-    var time = 0;
     response.resultItemList.forEach(function(job){
       var item = new FeedItem(job, i);
-      new PlacesAdapter(item).findPlaceIDs(item, itemsWithPlaceID, response, _this.params);
+      PlacesAdapter(item, places, response, _this.params, i);
       $('#dice-feed').append(item.formatDiv())
       i++;
     })

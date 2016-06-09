@@ -1,15 +1,13 @@
-function DistanceMatrixAdapter(itemsWithPlaceID, diceResponse, queryParams){
-  console.log(itemsWithPlaceID);
-  var places = [];
+function DistanceMatrixAdapter(places, diceResponse, queryParams){
+  console.log(places);
+  var placeIds = [];
 
-  itemsWithPlaceID.forEach(function(item){ // create place ID objects for distance query
-    if (item.placeID) {
-      places.push({placeId: item.placeID});
-    }
+  places.forEach(function(place){ // create place ID objects for distance query
+    placeIds.push({placeId: place.placeId});
   });
 
   var realPlaces = [];
-  places.forEach(function(place){
+  placeIds.forEach(function(place){
     if (place.placeId !== "ZERO_RESULTS" || place.placeId !=="OVER_QUERY_LIMIT") {
       realPlaces.push(place);
     }
@@ -23,7 +21,7 @@ function DistanceMatrixAdapter(itemsWithPlaceID, diceResponse, queryParams){
       origins: [queryParams.zip],
       destinations: section,
       travelMode: queryParams.transit,
-    }, callback.bind(itemsWithPlaceID));
+    }, callback.bind(places));
   });
 }
 
@@ -38,9 +36,22 @@ function splitItemsForDistanceQuery(places){
 function callback(response, status){
   if (status == google.maps.DistanceMatrixStatus.OK) {
     var feedItemIndex = 0;
-    var _this = this;
+    var places = this;
+    var results = response.rows[0].elements
+    var durationIndex = 0;
+    var placesIndex = 0;
+    while (placesIndex < places.length && durationIndex < results.length) {
+      if (places[placesIndex].placeId != "ZERO_RESULTS") {
+        var duration = results[durationIndex].duration.text
+        $("#feed-item-" + placesIndex).find(".job-distance").append(duration);
+        durationIndex++;
+      } else {
+        $("#feed-item-" + placesIndex).find(".job-distance").append("No route available");
+      }
+      placesIndex++;
+    }
 
-    for (var destinationAddressIndex = 0; destinationAddressIndex < response.destinationAddresses.length; destinationAddressIndex++){
+    /*for (var destinationAddressIndex = 0; destinationAddressIndex < response.destinationAddresses.length; destinationAddressIndex++){
       var destination = response.destinationAddresses[destinationAddressIndex]
       var duration = response.rows[0].elements[destinationAddressIndex].duration.text
       if (_this[feedItemIndex].googleName === destination.split(/ \d+/)[0].replace(/,/g, '')){
@@ -50,6 +61,6 @@ function callback(response, status){
       }
       $("#feed-item-" + feedItemIndex).find(".job-distance").append(_this[feedItemIndex].distance);
       feedItemIndex++;
-    }
+    }*/
   }
 }
