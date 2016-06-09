@@ -56,7 +56,6 @@ function renderJobData(e){
 
 
 // this function is called in DiceAdapter.getData
-// where to save the job from the Dice results
 function addFeedItemSaveButtonListener(){
   $(":button.save").click(saveAndRenderJob);
 }
