@@ -6,12 +6,12 @@ Job.prototype.save = function(){
   $.ajax({
     type: 'POST',
     url: '/jobs',
-    data: this.dataObj(),
+    data: this.getDataObj(),
     dataType: 'script'
   })
 }
 
-Job.prototype.dataObj = function(){
+Job.prototype.getDataObj = function(){
   return { "job":
     {
       "position": this.findPosition(),
