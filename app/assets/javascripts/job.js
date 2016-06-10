@@ -61,7 +61,9 @@ Job.prototype.findDatePosted = function(){
 }
 
 Job.prototype.findDistance = function(){
-  return this.infoDiv.children(".job-distance").text()
+  return this.infoDiv
+          .children(".job-distance")
+          .text()
 }
 
 Job.prototype.findOriginalSearchTerm = function(){
