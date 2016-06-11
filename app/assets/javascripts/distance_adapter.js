@@ -1,5 +1,4 @@
-function DistanceMatrixAdapter(places, diceResponse, queryParams){
-  console.log(places);
+function DistanceMatrixAdapter(places, queryParams){
   var placeIds = [];
 
   places.forEach(function(place){ // create place ID objects for distance query
