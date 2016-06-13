@@ -1,5 +1,5 @@
-function FeedItem(json, feedIndex, queryParams){
-  this.index  = feedIndex;
+function FeedItem(json, indexInJobsList, queryParams){
+  this.index  = indexInJobsList; // do I need?
   this.queryParams = queryParams;
 
   // info from dice API
@@ -10,7 +10,7 @@ function FeedItem(json, feedIndex, queryParams){
   this.location   = json.location;
 
   // info that comes from Google APIs
-  this.placeID    = "";
+  this.placeId    = "";
   this.googleName = "";
   this.distance   = "";
 }
