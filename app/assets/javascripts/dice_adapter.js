@@ -15,7 +15,7 @@ function DiceAdapter(skill, zip, age, trans) {
 }
 
 DiceAdapter.prototype.getData = function() {
-  var _this = this;
+  var _this = this; // to keep information about the query
   $.getJSON(this.searchUrl, this.appendFeedItems.bind(this))
   .done(function(response){ // hit when 50 items are successfully processed
     if (response.nextUrl !== undefined) {
@@ -53,7 +53,7 @@ DiceAdapter.prototype.getData = function() {
 DiceAdapter.prototype.sectionizeResults = function(allJobs){
   var sections = [];
   while (allJobs.length > 0){
-    sections.push(allJobs.splice(0,5)); // split into max-10 sections to avoid Places 5ps rate limit
+    sections.push(allJobs.splice(0,5)); // split into max-5 sections to avoid Places 5ps rate limit
   }
   return sections;
 }
