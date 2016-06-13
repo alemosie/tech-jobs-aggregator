@@ -23,6 +23,7 @@ DiceAdapter.prototype.getData = function() {
       _this.searchUrl = "http://service.dice.com/" + response.nextUrl;
       _this.getData();
     } else {
+      $('#results-count').append("<h4><i>Found " + response.count + " results</i></h4><br>")
       addFeedItemSaveButtonListener();
 
       var jobs = _this.allJobs;
@@ -40,7 +41,6 @@ DiceAdapter.prototype.getData = function() {
             });
           });
           Promise.all(sectionPromises).then(function(){
-            console.log(sectionPlaceIds)
             new DistanceMatrixAdapter(sectionPlaceIds, _this.params)
           });
         }, sections.indexOf(section)*2000);
@@ -76,7 +76,7 @@ DiceAdapter.prototype.appendFeedItems = function(response) {
     });
 
   } else {
-    $('#dice-feed').append("<h4><i>No results found</i></h4>")
+    $('#results-count').append("<h4><i>No results found</i></h4>")
   }
 }
 

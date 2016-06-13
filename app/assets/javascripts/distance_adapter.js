@@ -20,7 +20,6 @@ function callback(response, status){
     var places = this;
     var results = response.rows[0].elements
     var resultIndex = 0;
-    console.log(results)
     for (var index = 0; index < places.length; index++) {
       // If the place exists, then we get the duration, append to the page, and increment the resultIndex
       var placeIndex = places[index].index
