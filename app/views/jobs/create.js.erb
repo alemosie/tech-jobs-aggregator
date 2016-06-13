@@ -2,8 +2,9 @@ var jobID       = "<%= @job.id %>";
 var jobPosition = "<%= @job.position %>";
 var newSavedJob = "<%=j render partial: 'jobs/saved_job', locals: {job: @job} %>";
 
-function append(job){
-  if ( $("#no-saved-jobs").length ){
+function appendJob(job){
+  if ( $("#no-saved-jobs").length )
+  {
     $("#no-saved-jobs").remove();
   }
   $('#saved-jobs-list').append(job);
@@ -27,5 +28,5 @@ function changeClickedButton(button, ID){
 }
 
 
-append(newSavedJob);
+appendJob(newSavedJob);
 changeClickedButton( findClickedButton(jobPosition), jobID );

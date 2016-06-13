@@ -2,8 +2,6 @@ require 'rails_helper'
 
 describe UsersController, type: :controller do
 
-  after(:all) { User.destroy_all }
-
   let(:request_params) do
     { user:
       {

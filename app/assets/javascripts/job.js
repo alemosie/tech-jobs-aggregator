@@ -6,12 +6,12 @@ Job.prototype.save = function(){
   $.ajax({
     type: 'POST',
     url: '/jobs',
-    data: this.dataObj(),
+    data: this.getDataObj(),
     dataType: 'script'
   })
 }
 
-Job.prototype.dataObj = function(){
+Job.prototype.getDataObj = function(){
   return { "job":
     {
       "position": this.findPosition(),
@@ -27,41 +27,43 @@ Job.prototype.dataObj = function(){
 
 Job.prototype.findPosition = function(){
   return this.infoDiv
-         .children(".job-title")
-         .children("a")
-         .text();
+           .children(".job-title")
+           .children("a")
+           .text();
 }
 
 Job.prototype.findUrl = function(){
   return this.infoDiv
-         .children(".job-title")
-         .children("a")
-         .attr("href");
+           .children(".job-title")
+           .children("a")
+           .attr("href");
 }
 
 Job.prototype.findCompany = function(){
   return this.infoDiv
-         .children(".job-company")
-         .text();
+           .children(".job-company")
+           .text();
 }
 
 Job.prototype.findLocation = function(){
   return this.infoDiv
-         .children(".job-location")
-         .text()
-         .split("Posted on ")[0]
-         .trim();
+           .children(".job-location")
+           .text()
+           .split("Posted on ")[0]
+           .trim();
 }
 
 Job.prototype.findDatePosted = function(){
   return this.infoDiv
-         .children(".job-location")
-         .text()
-         .split("Posted on ")[1];
+           .children(".job-location")
+           .text()
+           .split("Posted on ")[1];
 }
 
 Job.prototype.findDistance = function(){
-  return this.infoDiv.children(".job-distance").text()
+  return this.infoDiv
+          .children(".job-distance")
+          .text()
 }
 
 Job.prototype.findOriginalSearchTerm = function(){
