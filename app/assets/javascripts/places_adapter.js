@@ -1,25 +1,17 @@
-function PlacesAdapter(feedItem){
-  this.textSearchRequest = {
-    query: feedItem.company + " near " + feedItem.location
-  }
-  this.service = new google.maps.places.PlacesService($('#google-map').get(0));
-}
-
-PlacesAdapter.prototype.findPlaceIDs = function(feedItem, itemsWithPlaceID, diceResponse, queryParams) {
-  this.service.textSearch(this.textSearchRequest, function(results, status) { // search for place IDs
+function PlacesAdapter(feedItem, places, sectionLength, resolve) {
+  var textSearchRequest = { query: feedItem.company + " in " + feedItem.location};
+  var service = new google.maps.places.PlacesService($('#google-map').get(0));
+    service.textSearch(textSearchRequest, function(results, status) { // search for place IDs
       if (status == google.maps.places.PlacesServiceStatus.OK) { // begin callback
-        feedItem.placeID = results[0].place_id;
-        feedItem.formattedAddress = results[0].formatted_address;
+        feedItem.placeId = results[0].place_id;
         feedItem.googleName = results[0].name;
-
-        itemsWithPlaceID.push(feedItem);  // to store newly enriched feed items
+        places.push({placeId: feedItem.placeId, index: feedItem.index});  // to store newly enriched feed items
       } else {
-        feedItem.placeID = status;
-        feedItem.googleName = status;
-        itemsWithPlaceID.push(feedItem);
+        feedItem.placeID = "ZERO_RESULTS";
+        feedItem.googleName = "ZERO_RESULTS";
+        places.push({placeId: "ZERO_RESULTS", index: feedItem.index});
       }
-      if (itemsWithPlaceID.length === diceResponse.count){ // if all placeIDs retrieved
-        new DistanceMatrixAdapter(itemsWithPlaceID, diceResponse, queryParams);
-      }
+
+      resolve();
     });
 }

@@ -1,12 +1,16 @@
-function FeedItem(json, feedIndex){
-  this.feedIndex  = feedIndex;
+function FeedItem(json, indexInJobsList, queryParams){
+  this.index  = indexInJobsList; // do I need?
+  this.queryParams = queryParams;
+
+  // info from dice API
   this.position   = json.jobTitle;
   this.url        = json.detailUrl;
   this.company    = json.company;
   this.datePosted = json.date;
   this.location   = json.location;
-  this.placeID    = "";
-  this.formattedAddress = "";
+
+  // info that comes from Google APIs
+  this.placeId    = "";
   this.googleName = "";
   this.distance   = "";
 }
@@ -43,7 +47,7 @@ FeedItem.prototype.formatSaveButton = function(){
 FeedItem.prototype.formatDiv = function(){
   // this.location = this.getLocationOfCompany();
   return '<article class="post">' +
-         '<div class="job post-preview col-xs-10 no-gutter" id=feed-item-' + this.feedIndex + '>' +
+         '<div class="job lazy post-preview col-xs-10 no-gutter" id=feed-item-' + this.index + '>' +
          this.formatPosition() +
          this.formatCompany() +
          this.formatLocation() +

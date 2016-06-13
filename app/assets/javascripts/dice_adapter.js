@@ -10,36 +10,73 @@ function DiceAdapter(skill, zip, age, trans) {
   this.ageQuery   = "age=" + age;
   this.baseUrl = "http://service.dice.com/api/rest/jobsearch/v1/simple.json?";
   this.searchUrl = this.baseUrl + this.skillQuery + "&" + this.zipQuery + "&sort=1&" + this.ageQuery;
+
+  this.allJobs = [];
+  this.allJobsWithPlaces = []
 }
 
 DiceAdapter.prototype.getData = function() {
   var _this = this;
   $.getJSON(this.searchUrl, this.appendFeedItems.bind(this))
-  .done(function(response){
+  .done(function(response){ // hit when 50 items are successfully process
     if (response.nextUrl !== undefined) {
       _this.searchUrl = "http://service.dice.com/" + response.nextUrl;
       _this.getData();
     } else {
+      $('#results-count').append("<h4><i>Found " + response.count + " results</i></h4><br>")
       addFeedItemSaveButtonListener();
+
+      var jobs = _this.allJobs;
+      var sections = _this.sectionizeResults(jobs);
+
+      // iterate through sections
+      sections.forEach(function(section){
+        setTimeout(function() {
+          var sectionPlaceIds = [];
+          // create an array of promises of placeId call for each section to execute once completed
+          var sectionPromises = section.map(function(job){
+            return new Promise(function(resolve, reject){
+              // the placeId call, where we will resolve the promises
+              new PlacesAdapter(job, sectionPlaceIds, section.length, resolve)
+            });
+          });
+          Promise.all(sectionPromises).then(function(){
+            new DistanceMatrixAdapter(sectionPlaceIds, _this.params)
+          });
+        }, sections.indexOf(section)*2000);
+      });
     }
-  })
+  });
 }
 
+
+
+DiceAdapter.prototype.sectionizeResults = function(allJobs){
+  var sections = [];
+  while (allJobs.length > 0){
+    sections.push(allJobs.splice(0,5)); // split into max-10 sections to avoid Places 5ps rate limit
+  }
+  return sections;
+}
+
+DiceAdapter.prototype.getPlaceIdsForJobsInSection = function(section, places){
+}
+
+
+// this callback is hit for every 50 results we get back from Dice
 DiceAdapter.prototype.appendFeedItems = function(response) {
   var _this = this;
   if (response.count > 0) {
-    $('#dice-feed').append("<h4><i>Found " + response.count + " results</i></h4><br>")
-    var itemsWithPlaceID = []; // to store feed items with place ids outside of calls
-    var i = 0
-    var time = 0;
-    response.resultItemList.forEach(function(job){
-      var item = new FeedItem(job, i);
-      new PlacesAdapter(item).findPlaceIDs(item, itemsWithPlaceID, response, _this.params);
-      $('#dice-feed').append(item.formatDiv())
-      i++;
-    })
+    var jobs = response.resultItemList;
+    jobs.forEach(function(job){
+      var indexInJobsList = _this.allJobs.length; // anticipate position of newJob in allJobs
+      var newJob = new FeedItem(job, indexInJobsList, _this.params);
+      _this.allJobs.push(newJob);
+      $('#dice-feed').append(newJob.formatDiv())
+    });
+
   } else {
-    $('#dice-feed').append("<h4><i>No results found</i></h4>")
+    $('#results-count').append("<h4><i>No results found</i></h4>")
   }
 }
 
