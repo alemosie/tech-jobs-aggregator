@@ -12,7 +12,6 @@ function DiceAdapter(skill, zip, age, trans) {
   this.searchUrl = this.baseUrl + this.skillQuery + "&" + this.zipQuery + "&sort=1&" + this.ageQuery;
 
   this.allJobs = [];
-  this.allJobsWithPlaces = []
 }
 
 DiceAdapter.prototype.getData = function() {
