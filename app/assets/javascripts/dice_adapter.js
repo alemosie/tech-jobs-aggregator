@@ -59,9 +59,6 @@ DiceAdapter.prototype.sectionizeResults = function(allJobs){
   return sections;
 }
 
-DiceAdapter.prototype.getPlaceIdsForJobsInSection = function(section, places){
-}
-
 
 // this callback is hit for every 50 results we get back from Dice
 DiceAdapter.prototype.appendFeedItems = function(response) {
