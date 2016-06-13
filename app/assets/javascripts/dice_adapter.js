@@ -17,7 +17,7 @@ function DiceAdapter(skill, zip, age, trans) {
 DiceAdapter.prototype.getData = function() {
   var _this = this;
   $.getJSON(this.searchUrl, this.appendFeedItems.bind(this))
-  .done(function(response){ // hit when 50 items are successfully process
+  .done(function(response){ // hit when 50 items are successfully processed
     if (response.nextUrl !== undefined) {
       _this.searchUrl = "http://service.dice.com/" + response.nextUrl;
       _this.getData();
